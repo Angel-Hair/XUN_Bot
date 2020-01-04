@@ -18,8 +18,8 @@ def check_unsafe_attributes(string):
         elif toktype == tokenize.OP:
             pre_op = tokval
 
-def remove_l(l: dict):
-    pl = l
+def remove_l(loacl_dict: dict):
+    pl = loacl_dict
     del_l = []
     for key in pl:
         if "module '" in str(pl[key]):
@@ -30,6 +30,19 @@ def remove_l(l: dict):
     
     return pl
 
+def check(loacl_dict: dict):
+    repass_list = []
+    pl = loacl_dict
+
+    key_list = list(pl.keys())
+    if "END" in key_list:
+        return str(pl["END"])
+
+    for key in pl.keys():
+        repass_list.append("{}: {}".format(key, pl[key]))
+        
+    return "\n".join(repass_list)
+
 async def get_end_calculate(conde_str: str) -> str:
     repass = ''
     try:
@@ -38,7 +51,7 @@ async def get_end_calculate(conde_str: str) -> str:
         l = {}
         exec(conde_str, g, l)
         l = remove_l(l)
-        repass = "{}".format(l)
+        repass = check(l)
     except Exception as e:
         repass = "[Error] {}".format(e)
     

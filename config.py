@@ -11,6 +11,8 @@ SUPERUSERS = {1234567} # 管理员（你）的QQ号
 
 # ————————以下是部分功能模块需要的额外配置，请参见github上的说明进行配置————————
 
-SAUCENAO_KEY = "" # SauceNAO的API key
+SAUCENAO_KEY = "" # SauceNAO 的 API key
+EM = 4.0 # 地震速报的最低震级
+CEICONLYCN = True # 是否只报道国内地震
 
 # —————————————————————————————————————————————————————————————————————————

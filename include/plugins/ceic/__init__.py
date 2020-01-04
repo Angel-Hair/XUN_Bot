@@ -3,9 +3,12 @@ from .data_source import ceicinfo
 import nonebot
 from aiocqhttp.exceptions import Error as CQHttpError
 
+import sys
+sys.path.append('../../../')
+from config import EM, CEICONLYCN
 
 print("[info]loading ceicinfo……")
-ceic = ceicinfo(4.0)
+ceic = ceicinfo(EM, CEICONLYCN)
 
 @nonebot.scheduler.scheduled_job('cron', minute='*')
 async def _():
