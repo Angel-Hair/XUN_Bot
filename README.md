@@ -6,7 +6,7 @@ XUN 是一个基于 ![NoneBot](https://github.com/richardchien/nonebot) 和 ![�
 
 ## 部署
 
-由于XUN基于![NoneBot](https://github.com/richardchien/nonebot)和![酷Q](https://cqp.cc)，所以在使用前需要了解这两个的基本食用方：
+由于XUN基于![NoneBot](https://github.com/richardchien/nonebot)和![酷Q](https://cqp.cc)，所以在使用前需要了解这两个的基本食用方法：
 
 * ![NoneBot官方手册](https://nonebot.cqp.moe)
 * ![酷Q](https://cqp.cc)

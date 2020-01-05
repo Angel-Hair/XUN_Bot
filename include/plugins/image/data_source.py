@@ -117,7 +117,7 @@ class ascii2d:
     self.header = "————ascii2d————"
 
   def get_search_data(self, url: str, data=None):
-    if data:
+    if data is not None:
       html = data
     else:
       # print("get_search_url: ", url)
