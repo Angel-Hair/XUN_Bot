@@ -3,6 +3,9 @@ import requests
 from lxml import etree
 import sys, threading
 
+sys.path.append('../../../')
+from config import TIMELIMIT
+
 
 class KThread(threading.Thread):
   """A subclass of threading.Thread, with a kill() method.
@@ -167,7 +170,7 @@ class ascii2d:
     return repass
 
 
-@timeout(7)
+@timeout(TIMELIMIT)
 async def get_view(sc, image_url: str) -> str:
   header = sc.header
   print("[info]Now starting get the {}".format(header))
