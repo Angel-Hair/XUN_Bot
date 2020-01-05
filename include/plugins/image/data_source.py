@@ -143,23 +143,26 @@ class ascii2d:
     return po
 
   def get_view(self, ascii2d) -> str:
+    repass = ''
     url_index = "https://ascii2d.net/search/url/{}".format(ascii2d)
     # print("url_index: ", url_index)
     html_index_data = requests.get(url_index)
     print("[info]index html data OK.")
     html_index = etree.HTML(html_index_data.text)
 
-    a_url_foot = html_index.xpath('//div[@class="detail-link pull-xs-right hidden-sm-down gray-link"]')[0].xpath('./span/a/@href')
-    url2 = "https://ascii2d.net{}".format(a_url_foot[1])
+    neet_div = html_index.xpath('//div[@class="detail-link pull-xs-right hidden-sm-down gray-link"]')
 
-    color = self.get_search_data('', data=html_index)
-    bovw = self.get_search_data(url2)
+    if neet_div:
+      a_url_foot = neet_div[0].xpath('./span/a/@href')
+      url2 = "https://ascii2d.net{}".format(a_url_foot[1])
 
-    repass = ''
-    if color and bovw:
-      putline1 = self.add_repass("色调检索", color)
-      putline2 = self.add_repass("特征检索", bovw)
-    repass = "\n".join([putline1, putline2])
+      color = self.get_search_data('', data=html_index)
+      bovw = self.get_search_data(url2)
+
+      if color and bovw:
+        putline1 = self.add_repass("色调检索", color)
+        putline2 = self.add_repass("特征检索", bovw)
+      repass = "\n".join([putline1, putline2])
 
     return repass
 
@@ -179,6 +182,7 @@ async def get_view(sc, image_url: str) -> str:
   if view:
     putline = "\n\n".join([header, view])
     print("[info]Loading {} page succeeded".format(header))
+  else: print("[warning]Loading {} page failed".format(header))
 
   return putline
 
