@@ -81,7 +81,7 @@ class SauceNAO:
     params['db'] = db
     params['numres'] = numres
     self.params = params
-    self.header = "————saucenao————"
+    self.header = "————>saucenao<————"
 
 
   def get_sauce(self, url):
@@ -114,7 +114,7 @@ class ascii2d:
 
   def __init__(self, num=2):
     self.num = num
-    self.header = "————ascii2d————"
+    self.header = "————>ascii2d<————"
 
   def get_search_data(self, url: str, data=None):
     if data is not None:
@@ -164,19 +164,21 @@ class ascii2d:
     return repass
 
 
-@timeout(10)
-def get_view(sc, image_url: str) -> str:
+@timeout(7)
+async def get_view(sc, image_url: str) -> str:
   header = sc.header
+  print("[info]Now starting get the {}".format(header))
   view = ''
   putline = ''
 
   try:
     view = sc.get_view(image_url)
   except TimeoutException as e:
-    pass
+    print("[warning]Time out of the {}".format(header))
 
   if view:
     putline = "\n\n".join([header, view])
+    print("[info]Loading {} page succeeded".format(header))
 
   return putline
 
@@ -184,14 +186,14 @@ async def get_image_data(image_url: str, api_key: str):
   if type(image_url) == list:
     image_url = image_url[0]
 
-  print("[info]Loading Image Search Class……")
+  print("[info]Loading Image Search Container……")
   NAO = SauceNAO(api_key)
   ii2d = ascii2d()
 
   print("[info]Loading all view……")
   repass = ''
   for sc in [NAO, ii2d]:
-    putline = get_view(sc, image_url)
+    putline = await get_view(sc, image_url)
     if putline:
       if repass:
         repass = "\n\n".join([repass, putline])
