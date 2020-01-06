@@ -8,25 +8,24 @@ from .data_source import get_song_of_music
 
 
 def get_recommend(music_command: str):
-    keywords = []
-    if 'miku' in music_command.lower():
-        keywords.append('miku')
-    thu1 = thulac.thulac()
-    words = thu1.cut(music_command)
 
+    keywords = []
     user_words_path = path.join(path.dirname(__file__), "user_words.txt")
     user_words = []
     with open(user_words_path,'r', encoding='UTF-8') as f:
         for line in f:
-            user_words.append(str(line.strip('\n')))
+            usr = str(line.strip('\n'))
+            if usr.lower() in music_command.lower():
+                keywords.append(usr.lower())
+            user_words.append(usr)
+
+    thu1 = thulac.thulac()
+    words = thu1.cut(music_command)
     
     for word in words:
-        if (word[1] in ['a', 't', 'np', 'id', 'i']) or (word[1] == 'v'  and (word[0] not in ['推荐', '来', '听'])):
+        if (word[0].lower() not in keywords) and ((word[1] in ['a', 't', 'np', 'id', 'i']) or (word[1] == 'v'  and (word[0] not in ['推荐', '来', '听', '着']))):
             keywords.append(word[0])
-        else:
-            for usr in user_words:
-                if usr.lower() in word[0].lower():
-                    keywords.append(word[0])
+
     inline = "+".join(keywords)
 
     return inline
