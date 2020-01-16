@@ -14,6 +14,7 @@ SUPERUSERS = {1234567} # 管理员（你）的QQ号
 SAUCENAO_KEY = "" # SauceNAO 的 API key
 EM = 4.0 # 地震速报功能的最低震级
 CEICONLYCN = True # 是否只报道国内地震
-TIMELIMIT = 7 # 识图功能的时间限制
+TIMELIMIT_IMAGE = 7 # 识图功能的时间限制
+TIMELIMIT_REIMU = 12 # 上车功能的时间限制
 
 # —————————————————————————————————————————————————————————————————————————

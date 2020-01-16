@@ -2,7 +2,9 @@ import io
 import tokenize
 
 def check_unsafe_attributes(string):
-    """https://mozillazg.com/2016/05/python-some-security-problems-about-use-exec-function.rst.html"""
+    """This code is modified from:
+    https://mozillazg.com/2016/05/python-some-security-problems-about-use-exec-function.rst.html
+    """
     error_str = ["import os", "open("]
     for estr in error_str:
         if estr in string:
