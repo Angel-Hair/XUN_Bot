@@ -1,4 +1,4 @@
-# XUN_beta6.0
+# XUN_beta6.4
 
 ## 介绍
 
@@ -39,11 +39,12 @@ SUPERUSERS = {1234567} # 管理员（你）的QQ号
 
 # ————————以下是部分功能模块需要的额外配置，请参见github上的说明进行配置————————
 
-SAUCENAO_KEY = "" # SauceNAO 的 API key
-EM = 4.0 # 地震速报功能的最低震级
-CEICONLYCN = True # 是否只报道国内地震
-TIMELIMIT_IMAGE = 7 # 识图功能的时间限制
-TIMELIMIT_REIMU = 12 # 上车功能的时间限制
+SAUCENAO_KEY = "" # SauceNAO 的 API key | 类型为str
+EM = 4.0 # 地震速报功能的最低震级 | 类型为float
+CEICONLYCN = True # 是否只报道国内地震 | 类型为bool
+MAXINFO_REIMU = 3 # 上车功能查找目的地的最大数 | 类型为int>0
+TIMELIMIT_IMAGE = 7 # 识图功能的时间限制 | 类型为float
+TIMELIMIT_REIMU = 12 # 上车功能的时间限制 | 类型为float
 
 # —————————————————————————————————————————————————————————————————————————
 ```
@@ -54,8 +55,9 @@ TIMELIMIT_REIMU = 12 # 上车功能的时间限制
 * `SAUCENAO_KEY` ：在 识图 功能中采用了 SauceNAO 提供的服务，如果需要使用识图功能，需要你先去 ![SauceNAO](https://saucenao.com/) 申请一个API key。
 * `EM` ：设置 地震速报 功能中的通报的最低震级，只有震级大于等于该值才会被报道。推荐设置为4.0。
 * `CEICONLYCN` ：在 地震速报 功能中是否只报道国内地震，如果只需要报道国内地震请设置为True。推荐设置为True。
+* `MAXINFO_REIMU` ：在 上车 功能中配置查找的目的地的数量限制，最多只能显示指定数量的目的地，推荐设置为3，**注意此项会影响`TIMELIMIT_REIMU`的配置**，一般每增加1就需要`TIMELIMIT_REIMU`至少增加1.5。
 * `TIMELIMIT_IMAGE` ：在 识图 功能中设置的时间限制，单位为(s)，如果检索某个API来源时超时的话，会在控制台报出相应的警告，在回复中则不会有对应的内容。请根据服务器的网络环境自行设置，推荐设置在5~10之间。
-* `TIMELIMIT_REIMU` ：在 上车 功能中设置的时间限制，单位为(s)，如果检索某个API来源时超时的话，会在控制台报出相应的警告，在回复中则不会有对应的内容。请根据服务器的网络环境自行设置，推荐设置在9~14之间。
+* `TIMELIMIT_REIMU` ：在 上车 功能中设置的时间限制，单位为(s)，如果检索某个API来源时超时的话，会在控制台报出相应的警告，在回复中则不会有对应的内容。请根据服务器的网络环境和`MAXINFO_REIMU`的值自行设置，推荐设置在9~14之间。
 
 ## 食用方法
 

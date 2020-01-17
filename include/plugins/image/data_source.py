@@ -3,10 +3,9 @@ import requests
 from lxml import etree
 import sys
 
-sys.path.append('../../decorator/')
 sys.path.append('../../../')
 from config import TIMELIMIT_IMAGE
-from include.timeoutdecorator import timeout, TimeoutException
+from kth_timeoutdecorator import *
 
 class SauceNAO:
 
