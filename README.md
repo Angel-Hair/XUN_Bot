@@ -2,14 +2,14 @@
 
 ## 介绍
 
-XUN 是一个基于 ![NoneBot](https://github.com/richardchien/nonebot) 和 ![酷Q](https://cqp.cc) 的功能性QQ机器人，目前提供了点播、音乐推荐、天气查询、识图、搜番、上车、地震速报功能，由于是为了完成自己在群里的承诺，一时兴起才做的，所以写得比较粗糙，大家见谅。
+XUN 是一个基于 [NoneBot](https://github.com/richardchien/nonebot) 和 [酷Q](https://cqp.cc) 的功能性QQ机器人，目前提供了点播、音乐推荐、天气查询、识图、搜番、上车、地震速报功能，由于是为了完成自己在群里的承诺，一时兴起才做的，所以写得比较粗糙，大家见谅。
 
 ## 部署
 
-由于XUN基于![NoneBot](https://github.com/richardchien/nonebot)和![酷Q](https://cqp.cc)，所以在使用前需要了解这两个的基本食用方法：
+由于XUN基于 [NoneBot](https://github.com/richardchien/nonebot) 和 [酷Q](https://cqp.cc)，所以在使用前需要了解这两个的基本食用方法：
 
-* ![NoneBot官方手册](https://nonebot.cqp.moe)
-* ![酷Q](https://cqp.cc)
+* [NoneBot官方手册](https://nonebot.cqp.moe)
+* [酷Q](https://cqp.cc)
 
 ```bash
 # 克隆代码
@@ -51,8 +51,8 @@ TIMELIMIT_REIMU = 12 # 上车功能的时间限制 | 类型为float
 
 对应的说明：
 
-* `SUPERUSERS` ：管理员的QQ号，也就是你的QQ号，虽然目前还没有为管理员设置更多的权限服务，以后会计划开发的……另外，此字段为NoneBot自带配置字段，更多的说明可以参见NoneBot中对此字段的![描述](https://nonebot.cqp.moe/guide/basic-configuration.html#%E9%85%8D%E7%BD%AE%E8%B6%85%E7%BA%A7%E7%94%A8%E6%88%B7)。
-* `SAUCENAO_KEY` ：在 识图 功能中采用了 SauceNAO 提供的服务，如果需要使用识图功能，需要你先去 ![SauceNAO](https://saucenao.com/) 申请一个API key。
+* `SUPERUSERS` ：管理员的QQ号，也就是你的QQ号，虽然目前还没有为管理员设置更多的权限服务，以后会计划开发的……另外，此字段为NoneBot自带配置字段，更多的说明可以参见NoneBot中对此字段的[描述](https://nonebot.cqp.moe/guide/basic-configuration.html#%E9%85%8D%E7%BD%AE%E8%B6%85%E7%BA%A7%E7%94%A8%E6%88%B7)。
+* `SAUCENAO_KEY` ：在 识图 功能中采用了 SauceNAO 提供的服务，如果需要使用识图功能，需要你先去 [SauceNAO](https://saucenao.com/) 申请一个API key。
 * `EM` ：设置 地震速报 功能中的通报的最低震级，只有震级大于等于该值才会被报道。推荐设置为4.0。
 * `CEICONLYCN` ：在 地震速报 功能中是否只报道国内地震，如果只需要报道国内地震请设置为True。推荐设置为True。
 * `MAXINFO_REIMU` ：在 上车 功能中配置查找的目的地的数量限制，最多只能显示指定数量的目的地，推荐设置为3，**注意此项会影响`TIMELIMIT_REIMU`的配置**，一般每增加1就需要`TIMELIMIT_REIMU`至少增加1.5。
@@ -160,4 +160,4 @@ TIMELIMIT_REIMU = 12 # 上车功能的时间限制 | 类型为float
 
 ## 开源许可证
 
-本项目使用 ![LGPLv3](https://github.com/Angel-Hair/XUN_Bot/blob/master/LICENSE) 许可证，由于本项目的特殊性，本项目的源码中出现在 NoneBot 文档的部分（例如作为其示例代码），不使用 LGPLv3 许可，而使用和 NoneBot 一样的 MIT 许可。
+本项目使用 [LGPLv3](https://github.com/Angel-Hair/XUN_Bot/blob/master/LICENSE) 许可证，由于本项目的特殊性，本项目的源码中出现在 NoneBot 文档的部分（例如作为其示例代码），不使用 LGPLv3 许可，而使用和 NoneBot 一样的 MIT 许可。
