@@ -1,6 +1,35 @@
 import json
 import requests
 from random import choice
+import thulac
+from os import path
+import sys
+
+sys.path.append('../../../')
+from config import RECOMMENDER_MUSIC, PLAYLIST_MUSIC
+
+async def get_recommend(music_command: str):
+    print("[info]Start fetching keywords……")
+    keywords = []
+    user_words_path = path.join(path.dirname(__file__), "user_words.txt")
+    user_words = []
+    with open(user_words_path,'r', encoding='UTF-8') as f:
+        for line in f:
+            usr = str(line.strip('\n'))
+            if usr.lower() in music_command.lower():
+                keywords.append(usr.lower())
+            user_words.append(usr)
+
+    thu1 = thulac.thulac()
+    words = thu1.cut(music_command)
+    
+    for word in words:
+        if (word[0].lower() not in keywords) and ((word[1] in ['a', 't', 'np', 'id', 'i']) or (word[1] == 'v'  and (word[0] not in ['推荐', '来', '听', '着']))):
+            keywords.append(word[0])
+
+    inline = "+".join(keywords)
+
+    return inline
 
 def getzhuanji(url: str, headers: dict):
     zhuanji = dict()
@@ -39,8 +68,9 @@ def getalldata(keywords):
     return zhuanji, music
 
 async def get_song_of_music(keywords: str) -> str:
-
     print("[info]KEYWORDS:", keywords)
+    repass = ""
+    infot = []
 
     if not keywords:
         return "", "意向分析失败:("
@@ -58,7 +88,8 @@ async def get_song_of_music(keywords: str) -> str:
     data_json = json.loads(data_text[9:-1])
     songid = data_json["data"]["song"]["list"][0]["songid"]
     repass = "[CQ:music,type=qq,id=" + str(songid) + "]"
-    # infot = "[推荐者: " + zhuanji['zj_creator'] + " ;来源歌单: " + zhuanji['zj_name'] + "]"
-    infot = "[来自163歌单]" + zhuanji['zj_name']
+
+    if RECOMMENDER_MUSIC: infot.append("[推荐者]@" + zhuanji['zj_creator'])
+    if PLAYLIST_MUSIC: infot.append("[来自163歌单]" + zhuanji['zj_name'])
 
     return repass, infot
