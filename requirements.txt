@@ -4,4 +4,4 @@ APScheduler==3.6.3
 requests==2.22.0
 lxml==4.4.1
 thulac==0.2.1
-kth-timeoutdecorator==0.0.4
+kth-timeoutdecorator==0.0.5
