@@ -67,7 +67,7 @@ def getalldata(keywords):
 
     return zhuanji, music
 
-async def get_song_of_music(keywords: str) -> str:
+async def get_song_of_music(keywords: str):
     print("[info]KEYWORDS:", keywords)
     repass = ""
     infot = []
