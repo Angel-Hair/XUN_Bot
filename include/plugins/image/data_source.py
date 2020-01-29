@@ -58,12 +58,10 @@ class ascii2d:
         if data is not None:
             html = data
         else:
-            # print("get_search_url: ", url)
             html_data = requests.get(url)
             html = etree.HTML(html_data.text)
 
         all_data = html.xpath('//div[@class="detail-box gray-link"]/h6')
-        # print("all_data: ", all_data)
         info = []
         for data in all_data[:self.num]:
             info_url = data.xpath(".//a/@href")[0].strip()

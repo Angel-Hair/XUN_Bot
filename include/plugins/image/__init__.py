@@ -3,15 +3,11 @@ from nonebot import on_natural_language, NLPSession, IntentCommand
 
 from .data_source import get_image_data
 
-import sys
-sys.path.append('../../../')
-from config import SAUCENAO_KEY
-
 
 @on_command('image', aliases=('image', '搜图', '识图'))
 async def image(session: CommandSession):
     image_data = session.get('image', prompt='图呢？GKD')
-    image_data_report = await get_image_data(image_data, SAUCENAO_KEY)
+    image_data_report = await get_image_data(image_data, session.bot.config.SAUCENAO_KEY)
     if image_data_report:
         await session.send(image_data_report)
     else:
@@ -36,5 +32,4 @@ async def _(session: CommandSession):
 async def _(session: NLPSession):
     msg = session.msg
 
-    # 返回意图命令，前两个参数必填，分别表示置信度和意图命令名
     return IntentCommand(90.0, 'image', current_arg=msg or '')
