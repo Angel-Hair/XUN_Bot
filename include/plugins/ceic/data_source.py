@@ -27,14 +27,14 @@ class ceicinfo():
         table = html.xpath('//table[@class="news-table"]/tr[2]')[0]
         msg_time_str = table.xpath('./td[2]/text()')[0]
         msg_time = datetime.strptime(msg_time_str,'%Y-%m-%d %H:%M:%S')
-        print("[info]loading newtime……\nFirsttime: {}\nNew: {}".format(self.firsttime, msg_time))
+        print("[info]loading newdate……\tFirsttime: {}\tNew: {}".format(self.firsttime, msg_time))
         if msg_time != self.firsttime:
             self.firsttime = msg_time
             point = table.xpath('./td[6]/a/text()')[0]
             for add in self.add_list:
                 if (add in point) or (not self.only):
                     ms = float(table.xpath('./td[1]/text()')[0])
-                    if (ms > self.em):
+                    if (ms >= self.em):
                         po = dict()
                         d = int(table.xpath('./td[5]/text()')[0])
                         po['ms'] = ms
@@ -46,7 +46,7 @@ class ceicinfo():
 
                         return info
 
-                    else: print("[info]ms not >=".format(self.em))
+                    else: print("[info]ms not >= {}".format(self.em))
                 # else: print("{} not in add_list……".format(add))
         else: print("[info]time not update……")
         if not info: print("[info]Not update info.")
