@@ -3,7 +3,7 @@ from nonebot import on_command, CommandSession
 from .data_source import from_reimu_get_info
 
 
-@on_command('reimu', aliases=('reimu', '上车', '查找资源'))
+@on_command('reimu', aliases=('reimu', '上车', '上車'))
 async def reimu(session: CommandSession):
     key_word = session.get('key_word', prompt='你想到哪儿下车？')
     reimu_report = await from_reimu_get_info(key_word)

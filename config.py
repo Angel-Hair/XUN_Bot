@@ -3,7 +3,7 @@ from nonebot.default_config import *
 HOST = '0.0.0.0'
 PORT = 8080
 
-NICKNAME = {'小寻', 'XUN'}
+NICKNAME = {'小寻', 'XUN', '小尋'}
 
 COMMAND_START = {'', '/', '!', '／', '！'}
 

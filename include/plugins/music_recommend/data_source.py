@@ -1,6 +1,7 @@
 import json
 import requests
 from random import choice
+from hanziconv import HanziConv
 import thulac
 from os import path
 import sys
@@ -9,6 +10,7 @@ sys.path.append('../../../')
 from config import RECOMMENDER_MUSIC, PLAYLIST_MUSIC
 
 async def get_recommend(music_command: str):
+    music_command = HanziConv.toSimplified(music_command)
     print("[info]Start fetching keywords……")
     keywords = []
     user_words_path = path.join(path.dirname(__file__), "user_words.txt")

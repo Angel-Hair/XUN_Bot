@@ -4,7 +4,7 @@ from nonebot import on_natural_language, NLPSession, IntentCommand
 from .data_source import get_image_data
 
 
-@on_command('image', aliases=('image', '搜图', '识图'))
+@on_command('image', aliases=('image', '搜图', '识图', '搜圖', '識圖'))
 async def image(session: CommandSession):
     image_data = session.get('image', prompt='图呢？GKD')
     image_data_report = await get_image_data(image_data, session.bot.config.SAUCENAO_KEY)
@@ -28,7 +28,7 @@ async def _(session: CommandSession):
 
     session.state[session.current_key] = image_arg
 
-@on_natural_language(keywords={'image', '搜图', '识图'})
+@on_natural_language(keywords={'image', '搜图', '识图', '搜圖', '識圖'})
 async def _(session: NLPSession):
     msg = session.msg
 

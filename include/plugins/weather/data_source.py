@@ -1,7 +1,9 @@
 import json
 import requests
+from hanziconv import HanziConv
 
 async def get_weather_of_city(city: str) -> str:
+    city = HanziConv.toSimplified(city)
     url = 'http://wthrcdn.etouch.cn/weather_mini?city=' + city
     data_json = requests.get(url).json()
     if 'desc' in data_json:

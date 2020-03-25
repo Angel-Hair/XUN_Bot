@@ -3,7 +3,7 @@ from nonebot import on_command, CommandSession
 from .data_source import get_end_calculate
 
 
-@on_command('calculate', aliases=('计算', 'exp'))
+@on_command('calculate', aliases=('计算', 'exp','計算'))
 async def calculate(session: CommandSession):
     code_str = session.get('calculate', prompt='请输入公式或代码……')
     code_report = await get_end_calculate(code_str)

@@ -4,7 +4,7 @@ from nonebot import on_natural_language, NLPSession, IntentCommand
 from .data_source import get_anime
 
 
-@on_command('whatanime', aliases=('whatanime', '搜番', '识番'))
+@on_command('whatanime', aliases=('whatanime', '搜番', '识番', '搜番', '識番'))
 async def whatanime(session: CommandSession):
     anime_data = session.get('whatanime', prompt='图呢？GKD')
     anime_data_report = await get_anime(anime_data)
@@ -28,7 +28,7 @@ async def _(session: CommandSession):
 
     session.state[session.current_key] = image_arg
 
-@on_natural_language(keywords={'whatanime', '搜番', '识番'})
+@on_natural_language(keywords={'whatanime', '搜番', '识番', '搜番', '識番'})
 async def _(session: NLPSession):
     msg = session.msg
 

@@ -4,7 +4,7 @@ from nonebot import on_natural_language, NLPSession, IntentCommand
 from .data_source import get_song_of_music, get_recommend
 
 
-@on_command('music_recommend', aliases=('推荐音乐', '音乐推荐', '推荐一首'))
+@on_command('music_recommend', aliases=('推荐音乐', '音乐推荐', '推荐一首', '推薦音樂', '音樂推薦', '推薦一首'))
 async def music_recommend(session: CommandSession):
     music_command = session.get('command', prompt='你想听什么样的音乐呢？')
     keywords = await get_recommend(music_command)
@@ -29,7 +29,7 @@ async def _(session: CommandSession):
 
     session.state[session.current_key] = arg
 
-@on_natural_language(keywords={'音乐', '推荐', '推荐一首', '推荐首'})
+@on_natural_language(keywords={'推荐', '推荐一首', '推荐首', '推薦', '推薦一首', '推薦首'})
 async def _(session: NLPSession):
     stripped_msg = session.msg_text.strip()
 
