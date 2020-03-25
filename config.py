@@ -19,5 +19,11 @@ PLAYLIST_MUSIC = True # 音乐推荐功能的回复是否显示来源歌单 | �
 MAXINFO_REIMU = 3 # 上车功能查找目的地的最大数 | 类型为int>0
 TIMELIMIT_IMAGE = 7 # 识图功能的时间限制 | 类型为float
 TIMELIMIT_REIMU = 12 # 上车功能的时间限制 | 类型为float
+MORE_COMPLEX = False # 是否提供更加复杂的计算库 | 类型为bool
+CALCULATE_LIST = {
+    'numpy':'np',
+    'math':'',
+    'scipy':''
+    } # 需要提供的计算库名与可选的别名(仅在MORE_COMPLEX为真时有效) | 类型为dict
 
 # —————————————————————————————————————————————————————————————————————————
