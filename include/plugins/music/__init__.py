@@ -5,7 +5,7 @@ import re
 from .data_source import get_song_of_music
 
 
-@on_command('music', aliases=('音乐', '点播', '来首', '给朕来首', '音樂', '點播', '來首', '給朕來首'))
+@on_command('music', aliases=('音乐', '点播', '来首', '音樂', '點播', '來首'))
 async def music(session: CommandSession):
     music_name = session.get('music', prompt='要点播哪首歌呢？')
     music_report = await get_song_of_music(music_name)
@@ -28,7 +28,7 @@ async def _(session: CommandSession):
 
     session.state[session.current_key] = stripped_arg
 
-@on_natural_language(keywords={'点播', '来首', '给朕来首', '點播', '來首', '給朕來首'})
+@on_natural_language(keywords={'点播', '来首', '點播', '來首'})
 async def _(session: NLPSession):
     msg = session.msg_text
     pattern = re.compile('《(.*)》')
