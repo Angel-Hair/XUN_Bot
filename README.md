@@ -1,8 +1,8 @@
-# XUN_beta7.2
+# XUN_beta7.5
 
 ## 介绍
 
-XUN 是一个基于 [NoneBot](https://github.com/richardchien/nonebot) 和 [酷Q](https://cqp.cc) 的功能性QQ机器人，目前提供了点播、音乐推荐、天气查询、识图、搜番、上车、地震速报、计算、日语词典功能，由于是为了完成自己在群里的承诺，一时兴起才做的，所以写得比较粗糙，大家见谅。
+XUN 是一个基于 [NoneBot](https://github.com/richardchien/nonebot) 和 [酷Q](https://cqp.cc) 的功能性QQ机器人，目前提供了点播、音乐推荐、天气查询、识图、搜番、上车、地震速报、计算、日语词典、翻译功能，由于是为了完成自己在群里的承诺，一时兴起才做的，所以写得比较粗糙，大家见谅。
 
 ## 部署
 
@@ -39,23 +39,36 @@ SUPERUSERS = {123456} # 管理员（你）的QQ号
 
 # ————————以下是部分功能模块需要的额外配置，请参见github上的说明进行配置————————
 
+# KEY类
 SAUCENAO_KEY = "" # SauceNAO 的 API key | 类型为str
+BAIDUAPPID_TRANSL = "" # Baidu翻译 的 APP ID | 类型为str
+BAIDUKEY_TRANSL = "" # Baidu翻译 的 SecretKey | 类型为str
+
+# Max/Min类
 EM = 4.0 # 地震速报功能的最低震级 | 类型为float
-CEICONLYCN = True # 是否只报道国内地震 | 类型为bool
-RECOMMENDER_MUSIC = False # 音乐推荐功能的回复是否显示推荐者 | 类型为bool
-PLAYLIST_MUSIC = True # 音乐推荐功能的回复是否显示来源歌单 | 类型为bool
 MAXINFO_REIMU = 3 # 上车功能查找目的地的最大数 | 类型为int>0
 MAXLINE_JD = 7 # 日语词典功能查找条目的内容所允许的最大行书 | 类型为int>0
 MAXWOED_JD = 300 # 日语词典功能查找条目的内容所允许的最大字数 | 类型为int>0
+
+# TimeLimit类
 TIMELIMIT_IMAGE = 7 # 识图功能的时间限制 | 类型为float
 TIMELIMIT_REIMU = 12 # 上车功能的时间限制 | 类型为float
 TIMELIMIT_JD = 7 # 日语词典功能的时间限制 | 类型为float
+TIMELIMIT_TRANSL = 7 # 翻译功能的时间限制 | 类型为float
+
+# Bool类
+CEICONLYCN = True # 是否只报道国内地震 | 类型为bool
+RECOMMENDER_MUSIC = False # 音乐推荐功能的回复是否显示推荐者 | 类型为bool
+PLAYLIST_MUSIC = True # 音乐推荐功能的回复是否显示来源歌单 | 类型为bool
 MORE_COMPLEX = False # 是否提供更加复杂的计算库 | 类型为bool
+
+# 其他
 CALCULATE_LIST = {
     'numpy':'np',
     'math':'',
     'scipy':''
     } # 需要提供的计算库名与可选的别名(仅在MORE_COMPLEX为真时有效) | 类型为dict
+TO_TRANSL = "zh-CN" # 指定翻译功能的目标语言 | 类型为str
 
 # —————————————————————————————————————————————————————————————————————————
 ```
@@ -64,6 +77,8 @@ CALCULATE_LIST = {
 
 * `SUPERUSERS` ：管理员的QQ号，也就是你的QQ号，虽然目前还没有为管理员设置更多的权限服务，以后会计划开发的……另外，此字段为NoneBot自带配置字段，更多的说明可以参见NoneBot中对此字段的[描述](https://nonebot.cqp.moe/guide/basic-configuration.html#%E9%85%8D%E7%BD%AE%E8%B6%85%E7%BA%A7%E7%94%A8%E6%88%B7)。
 * `SAUCENAO_KEY` ：在 识图 功能中采用了 SauceNAO 提供的服务，如果需要使用识图功能，需要你先去 [SauceNAO](https://saucenao.com/) 申请一个API key。
+* `BAIDUAPPID_TRANSL` ：在 翻译 功能中采用了 百度翻译开放平台 提供的服务，如果需要使用翻译功能，需要你先去 [百度翻译开放平台](http://api.fanyi.baidu.com/) 申请一个APP ID 和 密钥。
+* `BAIDUKEY_TRANSL` ：在 翻译 功能中采用了 百度翻译开放平台 提供的服务，如果需要使用翻译功能，需要你先去 [百度翻译开放平台](http://api.fanyi.baidu.com/) 申请一个APP ID 和 密钥。
 * `EM` ：设置 地震速报 功能中的通报的最低震级，只有震级大于等于该值才会被报道。推荐设置为4.0。
 * `CEICONLYCN` ：在 地震速报 功能中是否只报道国内地震，如果只需要报道国内地震请设置为True。推荐设置为True。
 * `RECOMMENDER_MUSIC` ：在 音乐推荐 功能中是否需要回复显示推荐者。
@@ -71,11 +86,13 @@ CALCULATE_LIST = {
 * `MAXINFO_REIMU` ：在 上车 功能中配置查找的目的地的数量限制，最多只能显示指定数量的目的地，推荐设置为3，**注意此项会影响`TIMELIMIT_REIMU`的配置**，一般每增加1就需要`TIMELIMIT_REIMU`至少增加1.5。
 * `TIMELIMIT_IMAGE` ：在 识图 功能中设置的时间限制，单位为(s)，如果检索某个API来源时超时的话，会在控制台报出相应的警告，在回复中则不会有对应的内容。请根据服务器的网络环境自行设置，推荐设置在5~10之间。
 * `TIMELIMIT_JD` ：在 日文词典 功能中设置的时间限制，单位为(s)，详细介绍同上。
+* `TIMELIMIT_TRANSL` ：在 翻译 功能中设置的时间限制，单位为(s)，详细介绍同上。
 * `TIMELIMIT_REIMU` ：在 上车 功能中设置的时间限制，单位为(s)，如果检索某个API来源时超时的话，会在控制台报出相应的警告，在回复中则不会有对应的内容。请根据服务器的网络环境和`MAXINFO_REIMU`的值自行设置，推荐设置在9~14之间。
 * `MAXLINE_JD` ：在 日文词典 功能中查找条目的内容所允许的最大行书，超过该条数的内容将被省略，并报出提示。
 * `MORE_COMPLEX` ：在 日文词典 功能中查找条目的内容所允许的最大字数，超过该条数的内容将被省略，并报出提示。
 * `MORE_COMPLEX` ：在 计算 功能中是否需要引入更加用于复杂计算的库(如numpy、math等)，否则将只能计算最基本的公式。
 * `CALCULATE_LIST` ：在 计算 功能中需要引入的计算库名与可选的别名，类型为dict，键为库名，值为别名。**此项仅在`MORE_COMPLEX`为真时有效，需要注意被引入的库应该已被正确安装在机器上，且能够被执行环境所引用！**
+* `TO_TRANSL` : 在 翻译 功能中指定翻译的目标语言，默认为中文，其他语言的列表请参考 [百度翻译开发者手册](http://api.fanyi.baidu.com/doc/21) 和 [Googletrans](https://github.com/ssut/py-googletrans)
 
 ## 食用方法
 
@@ -97,6 +114,7 @@ CALCULATE_LIST = {
 * 音乐点播：'音乐', '点播', '来首' [注意音乐名用《》或者标准格式 命令+空格，使用 歌名-歌手 可以更准确]
 * 音乐推荐：'推荐音乐', '音乐推荐', '推荐一首'
 * 日语词典：'日典', 'jd'
+* 翻译：'翻译', 'transl'
 * 地震速报(被动技能)：误差±10分钟
 
 ## 功能说明
@@ -111,6 +129,8 @@ CALCULATE_LIST = {
 此功能整合了以前的 SauceNAO 和 ascii2d 两个功能，主要针对ACG图像和推图，本来打算加入各主流搜索引擎识图功能的，但是发现并没用公开API，如果对接 Selenium 倒是可以实现，但是未免有点浪费资源，所以就没继续写了……
 
 > XUN: 其实就是懒……
+
+*由于功能中采用了 SauceNAO 提供的服务，如果需要使用识图功能，需要你先去 [SauceNAO](https://saucenao.com/) 申请一个API key，并修改 `config.py` 中 `SAUCENAO_KEY` 的值。*
 
 **需要注意的是加入了超时机制，如果 SauceNAO 和 ascii2d 其中一个在检索的时候超时则不会有对应的结果！如果需要修改超时时间，需要修改 `config.py` 中的对应值， 详细配置请参考上面 [配置](#user-content-配置) 这一节的内容。**
 
@@ -170,7 +190,13 @@ CALCULATE_LIST = {
 
 此功能没有启用 `自然语言处理器` 模块，所以请用 `标准命令格式 + 查询单词` 的形式来使用，将会得到对应单词的部分词典释义。**过长或者行数过多的释义段将会被省略，并给出提示。**
 
-**应汉化组翻校的要求所做的功能，如果不需要该功能，只需要在 `\include\plugins\` 目录下删掉对应 `japanese_dictionary` 文件夹并重启XUN就可以了。**
+**应提灯喵汉化组所需做的功能，如果不需要该功能，只需要在 `\include\plugins\` 目录下删掉对应 `japanese_dictionary` 文件夹并重启XUN就可以了。**
+
+### 翻译
+
+![10.png](https://i.loli.net/2020/03/30/JZ3Un1wSmAyHDl8.png)
+
+翻译功能可以自动识别源语言，默认目标语言为中文，如要更改可修改 `config.py` 中 `TO_TRANSL` 的值，**由于采用了 百度翻译开放平台 提供的服务，需要你先去 [百度翻译开放平台](http://api.fanyi.baidu.com/) 申请一个APP ID 和 密钥，并修改 `BAIDUKEY_TRANSL` 和 `BAIDUAPPID_TRANSL` 的值。** 详细配置请参考上面 [配置](#user-content-配置) 这一节的内容。
 
 </details>
 <br>

@@ -4,7 +4,7 @@ import sys
 import re
 
 sys.path.append('../../../')
-from config import TIMELIMIT_JD, MAXINFO_JD, MAXWOED_JD
+from config import TIMELIMIT_JD, MAXLINE_JD, MAXWOED_JD
 from kth_timeoutdecorator import *
 
 @timeout(TIMELIMIT_JD)
@@ -36,11 +36,11 @@ async def get_definition_of_word(word: str) -> str:
         d = pattern_2.sub(r'', d)
         d = re.sub(r'\n.\n', "\n", d)
         line_num = d.count("\n")
-        if line_num > MAXINFO_JD:
+        if line_num > MAXLINE_JD:
             is_hidden = True
             line_is_hidden = True
             index = 0
-            for i in range(MAXINFO_JD):
+            for i in range(MAXLINE_JD):
                 index = d.find("\n", index+1)
             d = d[:index].strip()
         if len(d) > MAXWOED_JD:

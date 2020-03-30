@@ -1,14 +1,13 @@
 from nonebot import on_command, CommandSession
 from nonebot import on_natural_language, NLPSession, IntentCommand
-import thulac
 
 from .data_source import get_definition_of_word
 
 
 @on_command('jpd', aliases=('日典', 'jd'))
 async def jpd(session: CommandSession):
-    city = session.get('word', prompt='你想查询哪个单词呢？')
-    jpd_report = await get_definition_of_word(city)
+    word = session.get('word', prompt='你想查询哪个单词呢？')
+    jpd_report = await get_definition_of_word(word)
     if jpd_report:
         await session.send(jpd_report)
     else:
