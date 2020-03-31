@@ -13,9 +13,14 @@ async def from_reimu_get_info(key_word: str) -> str:
         return None
     repass = ""
     url = 'https://blog.reimu.net/search/' + key_word
+    url_s = 'https://blog.reimu.net/'
     try:
-        print("[info]Now starting get the {}".format(url))
-        repass = await get_repass(url)
+        if key_word == "最近的存档":
+            print("[info]Now starting get the {}".format(url_s))
+            repass = await get_repass(url_s)
+        else:
+            print("[info]Now starting get the {}".format(url))
+            repass = await get_repass(url)
     except TimeoutException as e:
         print("[warning] {}".format(e))
     
@@ -29,9 +34,13 @@ async def get_repass(url: str) -> str:
     html_data = requests.get(url)
     html = etree.HTML(html_data.text)
     
-    fund = html.xpath('//h1[@class="page-title"]/text()')[0]
-    if fund == "未找到":
-        return "老司机也找不到路了……"
+    fund_l = html.xpath('//h1[@class="page-title"]/text()')
+    if fund_l:
+        fund = fund_l[0]
+        if fund == "未找到":
+            return "老司机也找不到路了……"
+    else:
+        pass
 
     headers = html.xpath('//article/header/h2/a/text()')
     urls = html.xpath('//article/header/h2/a/@href')
@@ -40,7 +49,7 @@ async def get_repass(url: str) -> str:
     headers_d = []
     urls_d = []
     for i, header in enumerate(headers):
-        if "音乐" not in header:
+        if check_need_list(header):
             headers_d.append(headers[i])
             urls_d.append(urls[i])
         else: print("[info]This title {} does not meet the requirements".format(header))
@@ -86,3 +95,11 @@ async def get_son_html_info(h_s, url_s) -> str:
     else: print("[warning]Not get putline from {}".format(url_s))
 
     return repass
+
+def check_need_list(header: str) -> bool:
+    not_need = ['音乐', '御所动态']
+    for nd in not_need:
+        if nd in header:
+            return False
+            
+    return True
