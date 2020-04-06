@@ -14,6 +14,7 @@ def check_unsafe_attributes(string) -> (dict, dict):
     l = {}
     model_del_list = ['__import__','open','quit','exit','requests','help','license','exec','eval','copyright','credits']
 
+    exec('print("[info] calculate test code……")', g, l)
     if MORE_COMPLEX:
         for fn in CALCULATE_LIST.keys():
             sn = CALCULATE_LIST[fn]
@@ -26,7 +27,7 @@ def check_unsafe_attributes(string) -> (dict, dict):
     for md in model_del_list:
         if md in g_c['__builtins__'].keys():
             g_c['__builtins__'].pop(md)
-        else: print("[Error] {} not in global['__builtins__'] !".format(md))
+        else: print("[Warning] {} not in global['__builtins__'] !".format(md))
 
     go = tokenize.tokenize(io.BytesIO(string.encode('utf-8')).readline)
     pre_op = ''
