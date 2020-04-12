@@ -25,7 +25,7 @@ source ./venv/bin/activate # Linux
 pip install -r requirements.txt
 
 # 运行
-python run.py
+python bot.py
 ```
 
 ## 配置
