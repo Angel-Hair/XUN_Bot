@@ -1,8 +1,8 @@
-# XUN_beta7.8
+# XUN_beta8.8
 
 ## 介绍
 
-XUN 是一个基于 [NoneBot](https://github.com/richardchien/nonebot) 和 [酷Q](https://cqp.cc) 的功能性QQ机器人，目前提供了点播、音乐推荐、天气查询、识图、搜番、上车、地震速报、计算、日语词典、翻译功能，由于是为了完成自己在群里的承诺，一时兴起才做的，所以写得比较粗糙，大家见谅。
+XUN 是一个基于 [NoneBot](https://github.com/richardchien/nonebot) 和 [酷Q](https://cqp.cc) 的功能性QQ机器人，目前提供了点播、音乐推荐、天气查询、识图、识番、搜番、上车、地震速报、计算、日语词典、翻译功能，由于是为了完成自己在群里的承诺，一时兴起才做的，所以写得比较粗糙，大家见谅。
 
 ## 部署
 
@@ -47,6 +47,7 @@ BAIDUKEY_TRANSL = "" # Baidu翻译 的 SecretKey | 类型为str
 # Max/Min类
 EM = 4.0 # 地震速报功能的最低震级 | 类型为float
 MAXINFO_REIMU = 3 # 上车功能查找目的地的最大数 | 类型为int>0
+MAXINFO_ANIME = 4 # 搜番功能查找资源的最大数 | 类型为int>0
 MAXLINE_JD = 7 # 日语词典功能查找条目的内容所允许的最大行书 | 类型为int>0
 MAXWOED_JD = 300 # 日语词典功能查找条目的内容所允许的最大字数 | 类型为int>0
 
@@ -55,6 +56,7 @@ TIMELIMIT_IMAGE = 7 # 识图功能的时间限制 | 类型为float
 TIMELIMIT_REIMU = 12 # 上车功能的时间限制 | 类型为float
 TIMELIMIT_JD = 7 # 日语词典功能的时间限制 | 类型为float
 TIMELIMIT_TRANSL = 7 # 翻译功能的时间限制 | 类型为float
+TIMELIMIT_ANIME = 7 # 搜番功能的时间限制 | 类型为float
 
 # Bool类
 CEICONLYCN = True # 是否只报道国内地震 | 类型为bool
@@ -84,6 +86,7 @@ TO_TRANSL = "zh-CN" # 指定翻译功能的目标语言 | 类型为str
 * `RECOMMENDER_MUSIC` ：在 音乐推荐 功能中是否需要回复显示推荐者。
 * `PLAYLIST_MUSIC` ：在 音乐推荐 功能中是否需要回复显示来源歌单。
 * `MAXINFO_REIMU` ：在 上车 功能中配置查找的目的地的数量限制，最多只能显示指定数量的目的地，推荐设置为3，**注意此项会影响`TIMELIMIT_REIMU`的配置**，一般每增加1就需要`TIMELIMIT_REIMU`至少增加1.5。
+* `TIMELIMIT_ANIME` ：在 搜番 功能中配置查找的资源的数量限制，最多只能显示指定数量的番剧数，推荐设置为4。
 * `TIMELIMIT_IMAGE` ：在 识图 功能中设置的时间限制，单位为(s)，如果检索某个API来源时超时的话，会在控制台报出相应的警告，在回复中则不会有对应的内容。请根据服务器的网络环境自行设置，推荐设置在5~10之间。
 * `TIMELIMIT_JD` ：在 日文词典 功能中设置的时间限制，单位为(s)，详细介绍同上。
 * `TIMELIMIT_TRANSL` ：在 翻译 功能中设置的时间限制，单位为(s)，详细介绍同上。
@@ -109,7 +112,8 @@ TO_TRANSL = "zh-CN" # 指定翻译功能的目标语言 | 类型为str
 * 计算: '计算', 'exp' [可使用任何基于python的语法，但要注意结果变量一定要命令为"END"(注意大小写)]
 * 天气查询：'天气', '天气预报', '查天气'
 * 识图：'image', '搜图', '识图' [已整SauceNAO和ascii2d功能]
-* 识番剧: 'whatanime', '搜番', '识番'
+* 识番: 'whatanime', '识番'
+* 搜番: 'anime', '搜番'
 * 上车：'reimu', '上车', '查找资源'
 * 音乐点播：'音乐', '点播', '来首' [注意音乐名用《》或者标准格式 命令+空格，使用 歌名-歌手 可以更准确]
 * 音乐推荐：'推荐音乐', '音乐推荐', '推荐一首'
@@ -156,11 +160,21 @@ TO_TRANSL = "zh-CN" # 指定翻译功能的目标语言 | 类型为str
 
 输入 `对应命令 + 你需要音乐的描述` 就可以得到推荐音乐的回复，其中包含该歌曲所被包含歌单的信息。
 
-### 搜番
+### 识番(原搜番功能)
 
 ![5.png](https://i.loli.net/2020/01/04/9nPh3kQM7cbz4rE.png)
 
 该功能利用了![trace.moe](https://trace.moe/)公共API，会得到对应图片的番剧名称和时间锚点。
+
+**！注意，此功能原名为 搜番 ，在8.8-beta版本后被正式更名为 识番 ！**
+
+### 搜番
+
+![11.png](https://i.loli.net/2020/04/16/6cml3THnrEkpvSR.png)
+
+修改 `config.py` 中的 `MAXINFO_ANIME` 此值，可以更改回复时返回的资源数目，详细配置请参考上面 [配置](#user-content-配置) 这一节的内容。
+
+*与识番功能搭配食用，味道更佳~*
 
 ### 天气查询
 
@@ -176,16 +190,6 @@ TO_TRANSL = "zh-CN" # 指定翻译功能的目标语言 | 类型为str
 
 **注意启用该功能会每隔一分钟检索一次 ![国家地震台网](http://news.ceic.ac.cn/) ,比较消耗资源，如果不需要启用该功能，只需要在 `\include\plugins\` 目录下删掉对应 `ceic` 文件夹并重启XUN就可以了。**
 
-### 上车
-
-![8.png](https://i.loli.net/2020/01/16/J5NSW2BfbjMK6VZ.png)
-
-注意此功能没有启用 `自然语言处理器` 模块，所以请用 `标准命令格式 + 目的地关键词` 的形式来告诉XUN你想要去的目的地。
-
-*7.6-beta版本后加入了通过输入关键词 `最近的存档` 来查看最新的投稿的选项*
-
-**关于此功能我不会再有过多的描述了，请自行体会。**
-
 ### 日语词典
 
 ![9.png](https://i.loli.net/2020/03/28/SG7fdCcPRMxmuDt.png)
@@ -199,6 +203,16 @@ TO_TRANSL = "zh-CN" # 指定翻译功能的目标语言 | 类型为str
 ![10.png](https://i.loli.net/2020/03/30/JZ3Un1wSmAyHDl8.png)
 
 翻译功能可以自动识别源语言，默认目标语言为中文，如要更改可修改 `config.py` 中 `TO_TRANSL` 的值，**由于采用了 百度翻译开放平台 提供的服务，需要你先去 [百度翻译开放平台](http://api.fanyi.baidu.com/) 申请一个APP ID 和 密钥，并修改 `BAIDUKEY_TRANSL` 和 `BAIDUAPPID_TRANSL` 的值。** 详细配置请参考上面 [配置](#user-content-配置) 这一节的内容。
+
+### 上车
+
+![8.png](https://i.loli.net/2020/01/16/J5NSW2BfbjMK6VZ.png)
+
+注意此功能没有启用 `自然语言处理器` 模块，所以请用 `标准命令格式 + 目的地关键词` 的形式来告诉XUN你想要去的目的地。
+
+*7.6-beta版本后加入了通过输入关键词 `最近的存档` 来查看最新的投稿的选项*
+
+**关于此功能我不会再有过多的描述了，请自行体会。**
 
 </details>
 <br>
