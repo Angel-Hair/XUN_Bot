@@ -19,7 +19,7 @@ async def get_definition_of_word(word: str) -> str:
     if notfound:
         return notfound[0]
 
-    source = html.xpath('//div[@class="pbarTL"]/a/text()')
+    source = html.xpath('//div[@class="pbarTL"]')
     definition = []
     d_html = html.xpath('//div[@class="kiji"]')
     for d in d_html:
@@ -49,7 +49,7 @@ async def get_definition_of_word(word: str) -> str:
             d = d[:MAXWOED_JD].strip()
         if line_is_hidden:
             d += "……\n[Note]……有内容被省略……"
-        putline.append("【{}】\n{}".format(s,d))
+        putline.append("【{}】\n{}".format(s.xpath('string(.)').strip(),d))
     repass = "\n\n".join(putline)
     if is_hidden:
         repass += "\n\n[Note]有条目过长被省略，更多释义请参考: {}".format(url)

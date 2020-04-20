@@ -6,8 +6,6 @@ import json
 import sys
 
 from googletrans import Translator
-from pydeeplator.deepL import DeepLTranslator
-from pydeeplator.deepL import TranslateLanguageEnum, TranslateModeType
 
 sys.path.append('../../../')
 from config import TIMELIMIT_TRANSL, BAIDUAPPID_TRANSL, BAIDUKEY_TRANSL, TO_TRANSL
@@ -57,8 +55,6 @@ async def get_transl_of_content(content: str) -> str:
 
     transl_d['Google 翻译'] = google_translator.translate(content, dest = TO_TRANSL).text
     transl_d['Baidu 翻译'] = baidu_translator(content, BAIDUAPPID_TRANSL, BAIDUKEY_TRANSL, 'auto', TO_TRANSL[:2])
-    if TO_TRANSL[:2] == 'zh':
-        transl_d['DeepL 翻译'] = deepl_translator(content)
 
     repass = ""
     putline = []

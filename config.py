@@ -21,7 +21,7 @@ EM = 4.0 # 地震速报功能的最低震级 | 类型为float
 MAXINFO_REIMU = 3 # 上车功能查找目的地的最大数 | 类型为int>0
 MAXINFO_ANIME = 4 # 搜番功能查找番剧的最大数 | 类型为int>0
 MAXLINE_JD = 7 # 日语词典功能查找条目的内容所允许的最大行书 | 类型为int>0
-MAXWOED_JD = 300 # 日语词典功能查找条目的内容所允许的最大字数 | 类型为int>0
+MAXWOED_JD = 250 # 日语词典功能查找条目的内容所允许的最大字数 | 类型为int>0
 
 # TimeLimit类
 TIMELIMIT_IMAGE = 7 # 识图功能的时间限制 | 类型为float

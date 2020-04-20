@@ -6,4 +6,3 @@ lxml==4.4.1
 thulac==0.2.1
 kth-timeoutdecorator==0.0.5
 googletrans==2.4.0
-pydeeplator==0.0.1
