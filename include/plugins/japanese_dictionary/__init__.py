@@ -1,10 +1,10 @@
-from nonebot import on_command, CommandSession
+from nonebot import on_command, CommandSession, get_bot
 from nonebot import on_natural_language, NLPSession, IntentCommand
 
 from .data_source import get_definition_of_word
 
 
-@on_command('jpd', aliases=('日典', 'jd'))
+@on_command('jpd', aliases=('日典', 'jd'), permission=get_bot().level)
 async def jpd(session: CommandSession):
     word = session.get('word', prompt='你想查询哪个单词呢？')
     jpd_report = await get_definition_of_word(word)

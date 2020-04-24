@@ -1,11 +1,13 @@
 import requests
 from lxml import etree
-import sys
 import time
 
-sys.path.append('../../../')
-from config import TIMELIMIT_REIMU, MAXINFO_REIMU
 from kth_timeoutdecorator import *
+
+from nonebot import get_bot
+TIMELIMIT_REIMU = get_bot().config.TIMELIMIT_REIMU
+MAXINFO_REIMU = get_bot().config.MAXINFO_REIMU
+
 
 async def from_reimu_get_info(key_word: str) -> str:
     if "miku" in key_word.lower():

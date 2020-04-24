@@ -1,18 +1,17 @@
-from .data_source import ceicinfo
+from .data_source import Ceicinfo
 
-import nonebot
+from nonebot import get_bot, scheduler
+EM = get_bot().config.EM
+CEICONLYCN = get_bot().config.CEICONLYCN
 from aiocqhttp.exceptions import Error as CQHttpError
 
-import sys
-sys.path.append('../../../')
-from config import EM, CEICONLYCN
 
 print("[info]loading ceicinfo……")
-ceic = ceicinfo(EM, CEICONLYCN)
+ceic = Ceicinfo(EM, CEICONLYCN)
 
-@nonebot.scheduler.scheduled_job('cron', minute='*')
+@scheduler.scheduled_job('cron', minute='*')
 async def _():
-    bot = nonebot.get_bot()
+    bot = get_bot()
     group_list = await bot.get_group_list()
     mesg = await ceic.getceicinfo()
     if mesg:

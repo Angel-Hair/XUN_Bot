@@ -1,10 +1,10 @@
-from nonebot import on_command, CommandSession
+from nonebot import on_command, CommandSession, get_bot
 from nonebot import on_natural_language, NLPSession, IntentCommand
 
 from .data_source import get_transl_of_content
 
 
-@on_command('translation', aliases=('翻译', 'transl', '翻譯'))
+@on_command('translation', aliases=('翻译', 'transl', '翻譯'), permission=get_bot().level)
 async def translation(session: CommandSession):
     content = session.get('content', prompt='需要给出你想翻译的内容')
     transl_report = await get_transl_of_content(content)

@@ -4,7 +4,7 @@ import requests
 from datetime import datetime
 
 
-class ceicinfo():
+class Ceicinfo():
 
     def __init__(self, em: float =4.5, only: bool = True):  # 只报道震级>=em
         self.em = em

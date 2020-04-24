@@ -1,9 +1,9 @@
-from nonebot import on_command, CommandSession
+from nonebot import on_command, CommandSession, get_bot
 
 from .data_source import from_anime_get_info
 
 
-@on_command('anime', aliases=('anime', '搜番'))
+@on_command('anime', aliases=('anime', '搜番'), permission=get_bot().level)
 async def anime(session: CommandSession):
     key_word = session.get('key_word', prompt='需要的番剧名称是什么？')
     anime_report = await from_anime_get_info(key_word)

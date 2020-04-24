@@ -1,11 +1,11 @@
-from nonebot import on_command, CommandSession
+from nonebot import on_command, CommandSession, get_bot
 from nonebot import on_natural_language, NLPSession, IntentCommand
 import re
 
 from .data_source import get_song_of_music
 
 
-@on_command('music', aliases=('音乐', '点播', '来首', '音樂', '點播', '來首'))
+@on_command('music', aliases=('音乐', '点播', '来首', '音樂', '點播', '來首'), permission=get_bot().level)
 async def music(session: CommandSession):
     music_name = session.get('music', prompt='要点播哪首歌呢？')
     music_report = await get_song_of_music(music_name)
@@ -28,11 +28,10 @@ async def _(session: CommandSession):
 
     session.state[session.current_key] = stripped_arg
 
-@on_natural_language(keywords={'点播', '来首', '點播', '來首'})
+@on_natural_language(keywords={'点播', '来首', '點播', '來首'}, permission=get_bot().level)
 async def _(session: NLPSession):
     msg = session.msg_text
     pattern = re.compile('《(.*)》')
     music_name = pattern.findall(msg)[0]
 
-    # 返回意图命令，前两个参数必填，分别表示置信度和意图命令名
     return IntentCommand(90.0, 'music',  current_arg=music_name or '')

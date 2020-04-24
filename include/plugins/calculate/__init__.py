@@ -1,9 +1,9 @@
-from nonebot import on_command, CommandSession
+from nonebot import on_command, CommandSession, get_bot
 
 from .data_source import get_end_calculate
 
 
-@on_command('calculate', aliases=('计算', 'exp','計算'))
+@on_command('calculate', aliases=('计算', 'exp','計算'), permission=get_bot().level)
 async def calculate(session: CommandSession):
     code_str = session.get('calculate', prompt='请输入公式或代码……')
     code_report = await get_end_calculate(code_str)

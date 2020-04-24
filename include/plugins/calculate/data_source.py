@@ -1,10 +1,11 @@
 import io
 import tokenize
-import sys
 from copy import deepcopy
 
-sys.path.append('../../../')
-from config import MORE_COMPLEX, CALCULATE_LIST
+from nonebot import get_bot
+MORE_COMPLEX = get_bot().config.MORE_COMPLEX
+CALCULATE_LIST = get_bot().config.CALCULATE_LIST
+
 
 def check_unsafe_attributes(string) -> (dict, dict):
     """This code is modified from:

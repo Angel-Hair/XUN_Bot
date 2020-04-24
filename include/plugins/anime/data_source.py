@@ -1,11 +1,12 @@
 import requests
 from lxml import etree
-import sys
 import time
 
-sys.path.append('../../../')
-from config import TIMELIMIT_ANIME, MAXINFO_ANIME
 from kth_timeoutdecorator import *
+
+from nonebot import get_bot
+TIMELIMIT_ANIME = get_bot().config.TIMELIMIT_ANIME
+MAXINFO_ANIME = get_bot().config.MAXINFO_ANIME
 
 async def from_anime_get_info(key_word: str) -> str:
     repass = ""

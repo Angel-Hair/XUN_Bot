@@ -1,11 +1,14 @@
 from lxml import etree
 import requests
-import sys
 import re
 
-sys.path.append('../../../')
-from config import TIMELIMIT_JD, MAXLINE_JD, MAXWOED_JD
 from kth_timeoutdecorator import *
+
+from nonebot import get_bot
+TIMELIMIT_JD = get_bot().config.TIMELIMIT_JD
+MAXLINE_JD = get_bot().config.MAXLINE_JD
+MAXWOED_JD = get_bot().config.MAXWOED_JD
+
 
 @timeout(TIMELIMIT_JD)
 async def get_definition_of_word(word: str) -> str:

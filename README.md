@@ -1,8 +1,8 @@
-# XUN_beta9.1
+# XUN_alpha0.1
 
 ## 介绍
 
-XUN 是一个基于 [NoneBot](https://github.com/richardchien/nonebot) 和 [酷Q](https://cqp.cc) 的功能性QQ机器人，目前提供了点播、音乐推荐、天气查询、识图、识番、搜番、上车、地震速报、计算、日语词典、翻译功能，由于是为了完成自己在群里的承诺，一时兴起才做的，所以写得比较粗糙，大家见谅。
+XUN 是一个基于 [NoneBot](https://github.com/richardchien/nonebot) 和 [酷Q](https://cqp.cc) 的功能性QQ机器人，目前提供了点播、音乐推荐、天气查询、识图、识番、搜番、上车、地震速报、计算、日语词典、翻译、自我检查，权限等级功能，由于是为了完成自己在群里的承诺，一时兴起才做的，所以写得比较粗糙，大家见谅。
 
 ## 部署
 
@@ -28,7 +28,58 @@ pip install -r requirements.txt
 python bot.py
 ```
 
+## 权限等级列表
+
+序号为等级值，由下至上兼容，等级值越大，权限等级越底，权限管理越松。
+
+1. SUPERUSER :最高等级、管理员级
+2. PRIVATE_FRIEND :好友级
+3. GROUP_OWNER :群主级
+4. GROUP_ADMIN :群管理级
+5. GROUP_MEMBER :群员级
+6. PRIVATE_GROUP :群私聊级
+7. DISCUSS :讨论组级
+8. PRIVATE_DISCUSS :讨论组私聊级
+9. PRIVATE_OTHER :其它私聊级
+10. EVERYBODY :最低等级、无限级
+
+**注意XUN的权限管理和NoneBot的不一样，只需要设置 `PERMISSION_LEVEL` 的值，XUN的权限管理虽然基于NoneBot的权限声明，但差别很大，因为xun的权限等级是由下至上完全兼容的，也就是说如果设置为讨论组级，那么包括群私聊、群员一直到管理员，对这些人的功能使用权都会开放！另外，不建议将等级值设置为8以下。**
+
 ## 配置
+
+### 快速配置
+
+首先备份根目录下面的 `config.py` 文件，下面将对 `config.py` 中的一些比较重要的值进行说明，**需要注意如果只是修改这部分的值，并不能获得更好的体验**，这部分的内容是给希望能够快速上线体验功能的人准备的（~~指逃课~~，如果不希望快速上线，建议阅读下面的 [详细配置](#user-content-详细配置) 这一节的内容。
+
+#### 1、`SUPERUSERS`
+
+> SUPERUSERS = {123456} # 管理员（你）的QQ号
+
+设置为管理员权限的QQ号，可填写多个，类型为Set，虽然目前设置有管理员特权的功能只有自检功能，能设还是尽量多射几个。
+
+#### 2、`SAUCENAO_KEY` & `BAIDUAPPID_TRANSL` & `BAIDUKEY_TRANSL`
+
+> SAUCENAO_KEY = "" # SauceNAO 的 API key | 类型为str  
+> BAIDUAPPID_TRANSL = "" # Baidu翻译 的 APP ID | 类型为str  
+> BAIDUKEY_TRANSL = "" # Baidu翻译 的 SecretKey | 类型为str  
+
+你需要去单独申请的这几个API key，链接我就放这儿了，自己去申请吧。
+
+* [百度翻译开放平台](http://api.fanyi.baidu.com/)
+* [SauceNAO](https://saucenao.com/)
+
+*当然也可以不填写，但会影响部分功能的效果，比如Baidu的kay没填的话，翻译功能就只会提供Google的部分；而如果SauceNAO的key没填的话，识图功能就只会提供ascii2d的部分。*
+
+#### 3、你需要地震通报功能吗
+
+> \include\plugins\ceic
+
+因为启用 地震通报 功能会每隔一分钟检索一次 [国家地震台网](http://news.ceic.ac.cn/) ,会比较消耗网络资源，请确认你的服务器是否能够负担得起网络资源的消耗，如果不需要启用该功能，只需要在 `\include\plugins\` 目录下删掉对应 `ceic` 文件夹并重启XUN就可以了。
+
+### 详细配置
+
+<details>
+<summary><mark> 点击展开详细配置</mark></summary>
 
 修改 `config.py` 中的以下字段，填入对应值(注意备份):
 
@@ -39,6 +90,9 @@ SUPERUSERS = {123456} # 管理员（你）的QQ号
 
 # ————————以下是部分功能模块需要的额外配置，请参见github上的说明进行配置————————
 
+# Permission类
+PERMISSION_LEVEL = 6 # 权限等级值，建议不要设置为8以下 | 类型为int
+
 # KEY类
 SAUCENAO_KEY = "" # SauceNAO 的 API key | 类型为str
 BAIDUAPPID_TRANSL = "" # Baidu翻译 的 APP ID | 类型为str
@@ -47,9 +101,10 @@ BAIDUKEY_TRANSL = "" # Baidu翻译 的 SecretKey | 类型为str
 # Max/Min类
 EM = 4.0 # 地震速报功能的最低震级 | 类型为float
 MAXINFO_REIMU = 3 # 上车功能查找目的地的最大数 | 类型为int>0
-MAXINFO_ANIME = 4 # 搜番功能查找资源的最大数 | 类型为int>0
+MAXINFO_ANIME = 4 # 搜番功能查找番剧的最大数 | 类型为int>0
 MAXLINE_JD = 7 # 日语词典功能查找条目的内容所允许的最大行书 | 类型为int>0
-MAXWOED_JD = 300 # 日语词典功能查找条目的内容所允许的最大字数 | 类型为int>0
+MAXWOED_JD = 250 # 日语词典功能查找条目的内容所允许的最大字数 | 类型为int>0
+MAX_PERFORMANCE_PERCENT = [92,92,92] # 自检功能中的服务器占用比率最高值，顺序分别对应CPU、内存和硬盘 | 类型为list
 
 # TimeLimit类
 TIMELIMIT_IMAGE = 7 # 识图功能的时间限制 | 类型为float
@@ -69,33 +124,48 @@ CALCULATE_LIST = {
     'numpy':'np',
     'math':'',
     'scipy':''
-    } # 需要提供的计算库名与可选的别名(仅在MORE_COMPLEX为真时有效) | 类型为dict
-TO_TRANSL = "zh-CN" # 指定翻译功能的目标语言 | 类型为str
+    } # 就按功能种需要提供的计算库名与可选的别名(仅在MORE_COMPLEX为真时有效) | 类型为dict
+PROCESS_NAME_LIST = {} # 自检功能种需要提供的格外检查的进程名 | 类型为set
+TO_TRANSL = "zh-CN" # 翻译功能中指定翻译功能的目标语言 | 类型为str
 
 # —————————————————————————————————————————————————————————————————————————
 ```
 
 对应的说明：
 
-* `SUPERUSERS` ：管理员的QQ号，也就是你的QQ号，虽然目前还没有为管理员设置更多的权限服务，以后会计划开发的……另外，此字段为NoneBot自带配置字段，更多的说明可以参见NoneBot中对此字段的[描述](https://nonebot.cqp.moe/guide/basic-configuration.html#%E9%85%8D%E7%BD%AE%E8%B6%85%E7%BA%A7%E7%94%A8%E6%88%B7)。
-* `SAUCENAO_KEY` ：在 识图 功能中采用了 SauceNAO 提供的服务，如果需要使用识图功能，需要你先去 [SauceNAO](https://saucenao.com/) 申请一个API key。
-* `BAIDUAPPID_TRANSL` ：在 翻译 功能中采用了 百度翻译开放平台 提供的服务，如果需要使用翻译功能，需要你先去 [百度翻译开放平台](http://api.fanyi.baidu.com/) 申请一个APP ID 和 密钥。
-* `BAIDUKEY_TRANSL` ：在 翻译 功能中采用了 百度翻译开放平台 提供的服务，如果需要使用翻译功能，需要你先去 [百度翻译开放平台](http://api.fanyi.baidu.com/) 申请一个APP ID 和 密钥。
-* `EM` ：设置 地震速报 功能中的通报的最低震级，只有震级大于等于该值才会被报道。推荐设置为4.0。
-* `CEICONLYCN` ：在 地震速报 功能中是否只报道国内地震，如果只需要报道国内地震请设置为True。推荐设置为True。
-* `RECOMMENDER_MUSIC` ：在 音乐推荐 功能中是否需要回复显示推荐者。
-* `PLAYLIST_MUSIC` ：在 音乐推荐 功能中是否需要回复显示来源歌单。
-* `MAXINFO_REIMU` ：在 上车 功能中配置查找的目的地的数量限制，最多只能显示指定数量的目的地，推荐设置为3，**注意此项会影响`TIMELIMIT_REIMU`的配置**，一般每增加1就需要`TIMELIMIT_REIMU`至少增加1.5。
-* `TIMELIMIT_ANIME` ：在 搜番 功能中配置查找的资源的数量限制，最多只能显示指定数量的番剧数，推荐设置为4。
-* `TIMELIMIT_IMAGE` ：在 识图 功能中设置的时间限制，单位为(s)，如果检索某个API来源时超时的话，会在控制台报出相应的警告，在回复中则不会有对应的内容。请根据服务器的网络环境自行设置，推荐设置在5~10之间。
-* `TIMELIMIT_JD` ：在 日文词典 功能中设置的时间限制，单位为(s)，详细介绍同上。
-* `TIMELIMIT_TRANSL` ：在 翻译 功能中设置的时间限制，单位为(s)，详细介绍同上。
-* `TIMELIMIT_REIMU` ：在 上车 功能中设置的时间限制，单位为(s)，如果检索某个API来源时超时的话，会在控制台报出相应的警告，在回复中则不会有对应的内容。请根据服务器的网络环境和`MAXINFO_REIMU`的值自行设置，推荐设置在9~14之间。
-* `MAXLINE_JD` ：在 日文词典 功能中查找条目的内容所允许的最大行书，超过该条数的内容将被省略，并报出提示。
-* `MORE_COMPLEX` ：在 日文词典 功能中查找条目的内容所允许的最大字数，超过该条数的内容将被省略，并报出提示。
-* `MORE_COMPLEX` ：在 计算 功能中是否需要引入更加用于复杂计算的库(如numpy、math等)，否则将只能计算最基本的公式。
-* `CALCULATE_LIST` ：在 计算 功能中需要引入的计算库名与可选的别名，类型为dict，键为库名，值为别名。**此项仅在`MORE_COMPLEX`为真时有效，需要注意被引入的库应该已被正确安装在机器上，且能够被执行环境所引用！**
-* `TO_TRANSL` : 在 翻译 功能中指定翻译的目标语言，默认为中文，其他语言的列表请参考 [百度翻译开发者手册](http://api.fanyi.baidu.com/doc/21) 和 [Googletrans](https://github.com/ssut/py-googletrans)
+* NoneBot类
+  * `SUPERUSERS` ：管理员的QQ号，也就是你的QQ号，虽然目前还没有为管理员设置更多的权限服务，以后会计划开发的……另外，此字段为NoneBot自带配置字段，更多的说明可以参见NoneBot中对此字段的[描述](https://nonebot.cqp.moe/guide/basic-configuration.html#%E9%85%8D%E7%BD%AE%E8%B6%85%E7%BA%A7%E7%94%A8%E6%88%B7)。
+* Permission类
+  * `PERMISSION_LEVEL` ：权限等级值，请参考 [权限等级列表](#user-content-权限等级列表) 进行配置，**建议不要设置为8以下**。
+* KEY类
+  * `SAUCENAO_KEY` ：在 识图 功能中采用了 SauceNAO 提供的服务，如果需要使用识图功能，需要你先去 [SauceNAO](https://saucenao.com/) 申请一个API key。
+  * `BAIDUAPPID_TRANSL` ：在 翻译 功能中采用了 百度翻译开放平台 提供的服务，如果需要使用翻译功能，需要你先去 [百度翻译开放平台](http://api.fanyi.baidu.com/) 申请一个APP ID 和 密钥。
+  * `BAIDUKEY_TRANSL` ：在 翻译 功能中采用了 百度翻译开放平台 提供的服务，如果需要使用翻译功能，需要你先去 [百度翻译开放平台](http://api.fanyi.baidu.com/) 申请一个APP ID 和 密钥。
+* Max/Min类
+  * `EM` ：设置 地震速报 功能中的通报的最低震级，只有震级大于等于该值才会被报道。推荐设置为4.0。
+  * `MAXINFO_REIMU` ：在 上车 功能中配置查找的目的地的数量限制，最多只能显示指定数量的目的地，推荐设置为3，**注意此项会影响`TIMELIMIT_REIMU`的配置**，一般每增加1就需要`TIMELIMIT_REIMU`至少增加1.5。
+  * `MAXINFO_ANIME` ：在 搜番 功能中配置查找的资源的数量限制，最多只能显示指定数量的番剧数，推荐设置为4。
+  * `MAXLINE_JD` ：在 日文词典 功能中查找条目的内容所允许的最大行书，超过该条数的内容将被省略，并报出提示。
+  * `MAXWOED_JD` ：在 日文词典 功能查找条目的内容所允许的最大字数，超过该字数的内容将被省略，并报出提示。
+  * `MAX_PERFORMANCE_PERCENT` :  在 自我检查 功能中的服务器占用比率最高值，需填入长度为3的list，根据顺序分别对应CPU、内存和硬盘的最大占有率，如果超过该值，在群聊中，进行自检时会有对应的回应，并向所有管理员发送通知。
+* TimeLimit类
+  * `TIMELIMIT_IMAGE` ：在 识图 功能中设置的时间限制，单位为(s)，如果检索某个API来源时超时的话，会在控制台报出相应的警告，在回复中则不会有对应的内容。请根据服务器的网络环境自行设置，推荐设置在5~10之间。
+  * `TIMELIMIT_JD` ：在 日文词典 功能中设置的时间限制，单位为(s)，详细介绍同上。
+  * `TIMELIMIT_TRANSL` ：在 翻译 功能中设置的时间限制，单位为(s)，详细介绍同上。
+  * `TIMELIMIT_ANIME` ： 在 搜番 功能中设置的时间限制，单位为(s)，详细介绍同上。
+  * `TIMELIMIT_REIMU` ：在 上车 功能中设置的时间限制，单位为(s)，如果检索某个API来源时超时的话，会在控制台报出相应的警告，在回复中则不会有对应的内容。请根据服务器的网络环境和`MAXINFO_REIMU`的值自行设置，推荐设置在9~14之间。
+* Bool类
+  * `CEICONLYCN` ：在 地震速报 功能中是否只报道国内地震，如果只需要报道国内地震请设置为True。推荐设置为True。
+  * `RECOMMENDER_MUSIC` ：在 音乐推荐 功能中是否需要回复显示推荐者。
+  * `PLAYLIST_MUSIC` ：在 音乐推荐 功能中是否需要回复显示来源歌单。
+  * `MORE_COMPLEX` ：在 计算 功能中是否需要引入更加用于复杂计算的库(如numpy、math等)，否则将只能计算最基本的公式。
+* 其他
+  * `CALCULATE_LIST` ：在 计算 功能中需要引入的计算库名与可选的别名，类型为dict，键为库名，值为别名。**此项仅在`MORE_COMPLEX`为真时有效，需要注意被引入的库应该已被正确安装在机器上，且能够被执行环境所引用！**
+  * `PROCESS_NAME_LIST` ：在 自我检查 功能中需要提供的格外检查的进程名，如果发现同名的进程中至少有一个进程的状态不是"running"的时候，在群聊中，进行自检时会有对应的回应，并向所有管理员发送通知。
+  * `TO_TRANSL` : 在 翻译 功能中指定翻译的目标语言，默认为中文，其他语言的列表请参考 [百度翻译开发者手册](http://api.fanyi.baidu.com/doc/21) 和 [Googletrans](https://github.com/ssut/py-googletrans)
+
+</details>
+<br>
 
 ## 食用方法
 
@@ -110,6 +180,7 @@ TO_TRANSL = "zh-CN" # 指定翻译功能的目标语言 | 类型为str
 ### 各功能对应的命令[注意一个功能可能对应多个命令]:
 
 * 计算: '计算', 'exp' [可使用任何基于python的语法，但要注意结果变量一定要命令为"END"(注意大小写)]
+* 自我检查: 'check', '自检', '自檢'
 * 天气查询：'天气', '天气预报', '查天气'
 * 识图：'image', '搜图', '识图' [已整SauceNAO和ascii2d功能]
 * 识番: 'whatanime', '识番'
@@ -125,6 +196,17 @@ TO_TRANSL = "zh-CN" # 指定翻译功能的目标语言 | 类型为str
 
 <details>
 <summary><mark> 点击展开功能说明</mark></summary>
+
+### 自我检查
+
+![12.png](https://i.loli.net/2020/04/24/NkiQBzbreF5ESuR.png)
+![13.png](https://i.loli.net/2020/04/24/u2Ikdzop4Xcn3ZS.png)
+
+管理员目前唯一有特权的功能（~~枯了，管理员地位堪比清洁工~~
+
+非管理员调用此功能只会得到一个简单的回复，而管理员则会得到一个完整服务器状态检查表。
+
+另外，在群聊中，非管理员进行自检时如果发现危险，会有对应的回应并@任意一位管理员，然后向所有管理员发送一个包含完整服务器状态检查表的通知（如上图所示）。*若`SUPERUSERS`的值未填写，则不会有以上反应。*
 
 ### 识图
 
@@ -188,7 +270,7 @@ TO_TRANSL = "zh-CN" # 指定翻译功能的目标语言 | 类型为str
 
 被动技能，不需要主动调用。默认情况下只会报道发生在国内的地震并且要求震级大于等于4.0，如果需要报道周边国家的地震或者需要修改最低震级，需要修改 `config.py` 中的对应值，详细配置请参考上面 [配置](#user-content-配置) 这一节的内容。
 
-**注意启用该功能会每隔一分钟检索一次 ![国家地震台网](http://news.ceic.ac.cn/) ,比较消耗资源，如果不需要启用该功能，只需要在 `\include\plugins\` 目录下删掉对应 `ceic` 文件夹并重启XUN就可以了。**
+**注意启用该功能会每隔一分钟检索一次 [国家地震台网](http://news.ceic.ac.cn/) ,比较消耗资源，如果不需要启用该功能，只需要在 `\include\plugins\` 目录下删掉对应 `ceic` 文件夹并重启XUN就可以了。**
 
 ### 日语词典
 
@@ -228,6 +310,25 @@ TO_TRANSL = "zh-CN" # 指定翻译功能的目标语言 | 类型为str
 
 > XUN: ~~有生之年~~ 史 诗 巨 坑  
 > AH: 下属不许啵上司嘴！
+
+## alpha阶段的庆祝
+
+为了庆祝小寻终于一步步升级到alpha阶段，我特地来采访下群主SK：
+
+> AH: xun要升级到alpha版本了  
+> AH: 我来采访下你  
+> AH: 有什么想法没有？  
+
+> SK: 识图快了吗(恶臭表情)  
+
+> AH: 哈？  
+> AH: 我问你想法呢，没让你提你的屑建议  
+ 
+> SK: 那……  
+> SK: 我想看小寻的色图  
+
+> AH: 太屑了  
+> AH: 给爷爬  
 
 ## 开源许可证
 

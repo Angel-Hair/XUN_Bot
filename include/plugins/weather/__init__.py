@@ -1,4 +1,4 @@
-from nonebot import on_command, CommandSession
+from nonebot import on_command, CommandSession, get_bot
 from nonebot import on_natural_language, NLPSession, IntentCommand
 import thulac
 from hanziconv import HanziConv
@@ -6,7 +6,7 @@ from hanziconv import HanziConv
 from .data_source import get_weather_of_city
 
 
-@on_command('weather', aliases=('天气', '查天气', '天氣', '查天氣'))
+@on_command('weather', aliases=('天气', '查天气', '天氣', '查天氣'), permission=get_bot().level)
 async def weather(session: CommandSession):
     city = session.get('city', prompt='你想查询哪个城市的天气呢？')
     weather_report = await get_weather_of_city(city)
@@ -31,7 +31,7 @@ async def _(session: CommandSession):
     session.state[session.current_key] = stripped_arg
 
 
-@on_natural_language(keywords={'天气', '天氣'})
+@on_natural_language(keywords={'天气', '天氣'}, permission=get_bot().level)
 async def _(session: NLPSession):
     stripped_msg = session.msg_text.strip()
     stripped_msg = HanziConv.toSimplified(stripped_msg)
@@ -45,5 +45,4 @@ async def _(session: NLPSession):
             city = word[0]
             break
 
-    # 返回意图命令，前两个参数必填，分别表示置信度和意图命令名
     return IntentCommand(90.0, 'weather', current_arg=city or '')

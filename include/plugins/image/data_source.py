@@ -1,11 +1,12 @@
 import json
 import requests
 from lxml import etree
-import sys
 
-sys.path.append('../../../')
-from config import TIMELIMIT_IMAGE
 from kth_timeoutdecorator import *
+
+from nonebot import get_bot
+TIMELIMIT_IMAGE = get_bot().config.TIMELIMIT_IMAGE
+
 
 class SauceNAO:
 
@@ -82,9 +83,14 @@ class ascii2d:
         repass = ''
         url_index = "https://ascii2d.net/search/url/{}".format(ascii2d)
         # print("url_index: ", url_index)
-        html_index_data = requests.get(url_index)
-        print("[info]index html data OK.")
-        html_index = etree.HTML(html_index_data.text)
+        try:
+            html_index_data = requests.get(url_index)
+            html_index = etree.HTML(html_index_data.text)
+        except Exception as e:
+            print("[warning] ascii2d get html data failed.")
+            print(e)
+            return repass
+        else: print("[info]index html data OK.")
 
         neet_div = html_index.xpath('//div[@class="detail-link pull-xs-right hidden-sm-down gray-link"]')
 

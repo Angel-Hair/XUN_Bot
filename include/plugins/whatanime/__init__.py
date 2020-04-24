@@ -1,10 +1,10 @@
-from nonebot import on_command, CommandSession
+from nonebot import on_command, CommandSession, get_bot
 from nonebot import on_natural_language, NLPSession, IntentCommand
 
 from .data_source import get_anime
 
 
-@on_command('whatanime', aliases=('whatanime', '识番', '識番'))
+@on_command('whatanime', aliases=('whatanime', '识番', '識番'), permission=get_bot().level)
 async def whatanime(session: CommandSession):
     anime_data = session.get('whatanime', prompt='图呢？GKD')
     anime_data_report = await get_anime(anime_data)
@@ -28,9 +28,8 @@ async def _(session: CommandSession):
 
     session.state[session.current_key] = image_arg
 
-@on_natural_language(keywords={'whatanime', '识番', '識番'})
+@on_natural_language(keywords={'whatanime', '识番', '識番'}, permission=get_bot().level)
 async def _(session: NLPSession):
     msg = session.msg
 
-    # 返回意图命令，前两个参数必填，分别表示置信度和意图命令名
     return IntentCommand(90.0, 'whatanime', current_arg=msg or '')

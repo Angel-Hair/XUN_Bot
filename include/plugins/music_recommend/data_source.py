@@ -4,10 +4,11 @@ from random import choice
 from hanziconv import HanziConv
 import thulac
 from os import path
-import sys
 
-sys.path.append('../../../')
-from config import RECOMMENDER_MUSIC, PLAYLIST_MUSIC
+from nonebot import get_bot
+RECOMMENDER_MUSIC = get_bot().config.RECOMMENDER_MUSIC
+PLAYLIST_MUSIC = get_bot().config.PLAYLIST_MUSIC
+
 
 async def get_recommend(music_command: str):
     music_command = HanziConv.toSimplified(music_command)

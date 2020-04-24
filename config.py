@@ -11,6 +11,9 @@ SUPERUSERS = {123456} # 管理员（你）的QQ号
 
 # ————————以下是部分功能模块需要的额外配置，请参见github上的说明进行配置————————
 
+# Permission类
+PERMISSION_LEVEL = 6 # 权限等级值，建议不要设置为8以下 | 类型为int
+
 # KEY类
 SAUCENAO_KEY = "" # SauceNAO 的 API key | 类型为str
 BAIDUAPPID_TRANSL = "" # Baidu翻译 的 APP ID | 类型为str
@@ -22,6 +25,7 @@ MAXINFO_REIMU = 3 # 上车功能查找目的地的最大数 | 类型为int>0
 MAXINFO_ANIME = 4 # 搜番功能查找番剧的最大数 | 类型为int>0
 MAXLINE_JD = 7 # 日语词典功能查找条目的内容所允许的最大行书 | 类型为int>0
 MAXWOED_JD = 250 # 日语词典功能查找条目的内容所允许的最大字数 | 类型为int>0
+MAX_PERFORMANCE_PERCENT = [92,92,92] # 自检功能中的服务器占用比率最高值，顺序分别对应CPU、内存和硬盘 | 类型为list
 
 # TimeLimit类
 TIMELIMIT_IMAGE = 7 # 识图功能的时间限制 | 类型为float
@@ -41,7 +45,8 @@ CALCULATE_LIST = {
     'numpy':'np',
     'math':'',
     'scipy':''
-    } # 需要提供的计算库名与可选的别名(仅在MORE_COMPLEX为真时有效) | 类型为dict
-TO_TRANSL = "zh-CN" # 指定翻译功能的目标语言 | 类型为str
+    } # 就按功能种需要提供的计算库名与可选的别名(仅在MORE_COMPLEX为真时有效) | 类型为dict
+PROCESS_NAME_LIST = {} # 自检功能种需要提供的格外检查的进程名 | 类型为set
+TO_TRANSL = "zh-CN" # 翻译功能中指定翻译功能的目标语言 | 类型为str
 
 # —————————————————————————————————————————————————————————————————————————

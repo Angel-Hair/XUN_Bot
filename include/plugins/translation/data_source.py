@@ -3,23 +3,16 @@ import hashlib
 import urllib
 import random
 import json
-import sys
 
 from googletrans import Translator
 
-sys.path.append('../../../')
-from config import TIMELIMIT_TRANSL, BAIDUAPPID_TRANSL, BAIDUKEY_TRANSL, TO_TRANSL
 from kth_timeoutdecorator import *
 
-
-def deepl_translator(content: str) -> str:
-    result = DeepLTranslator(
-        translate_str=content,
-        target_lang=TranslateLanguageEnum.ZH,
-        translate_mode=TranslateModeType.SENTENCES,
-    ).translate()
-
-    return result['result']
+from nonebot import get_bot
+TIMELIMIT_TRANSL = get_bot().config.TIMELIMIT_TRANSL
+BAIDUAPPID_TRANSL = get_bot().config.BAIDUAPPID_TRANSL
+BAIDUKEY_TRANSL = get_bot().config.BAIDUKEY_TRANSL
+TO_TRANSL = get_bot().config.TO_TRANSL
 
 
 def baidu_translator(content: str, appid: str, secretKey: str, fromLang: "str = 'auto'", toLang: "str = 'zh'") -> str:

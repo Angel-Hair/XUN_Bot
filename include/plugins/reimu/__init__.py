@@ -1,9 +1,9 @@
-from nonebot import on_command, CommandSession
+from nonebot import on_command, CommandSession, get_bot
 
 from .data_source import from_reimu_get_info
 
 
-@on_command('reimu', aliases=('reimu', '上车', '上車'))
+@on_command('reimu', aliases=('reimu', '上车', '上車'), permission=get_bot().level)
 async def reimu(session: CommandSession):
     key_word = session.get('key_word', prompt='你想到哪儿下车？')
     reimu_report = await from_reimu_get_info(key_word)
