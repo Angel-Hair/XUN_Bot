@@ -1,8 +1,9 @@
-nonebot==1.5.0
+nonebot[scheduler]==1.6.0
 aiocqhttp==1.2.5
-APScheduler==3.6.3
 requests==2.23.0
 lxml==4.5.0
 thulac==0.2.1
 kth-timeoutdecorator==0.0.5
 googletrans==2.4.0
+feedparser==5.2.1
+pandas==0.25.1

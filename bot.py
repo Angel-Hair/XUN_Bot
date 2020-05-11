@@ -1,19 +1,7 @@
-from os import path
-
-from level import get_permission_level
-
-import nonebot
-
-import config
-
 if __name__ == '__main__':
-    level = get_permission_level(config.PERMISSION_LEVEL)
-    nonebot.NoneBot.level = level
-    
-    nonebot.init(config)
-    nonebot.load_builtin_plugins()
-    nonebot.load_plugins(
-        path.join(path.dirname(__file__), 'include', 'plugins'),
-        'include.plugins'
-    )
-    nonebot.run()
+    print("载入配置……")
+    import config 
+    print("载入组件……")
+    import xunbot
+    print("开始运行……")
+    xunbot.run(config)
