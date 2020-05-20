@@ -8,7 +8,7 @@
 ![Code Name](https://img.shields.io/badge/%E5%BC%80%E5%8F%91%E4%BB%A3%E5%8F%B7-Langskip-9cf)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/Angel-Hair/XUN_Bot)
 
-XUN 是一个基于 [NoneBot](https://github.com/richardchien/nonebot) 和 [酷Q](https://cqp.cc) 的功能型QQ机器人，目前提供了音乐点播、音乐推荐、天气查询、RSSHub订阅、使用帮助、识图、识番、搜番、上车、地震速报、计算、日语词典、翻译、自我检查，权限等级功能，由于是为了完成自己在群里的承诺，一时兴起才做的，所以写得比较粗糙，大家见谅。
+XUN 是一个基于 [NoneBot](https://github.com/richardchien/nonebot) 和 [酷Q](https://cqp.cc) 的功能型QQ机器人，目前提供了音乐点播、音乐推荐、天气查询、RSSHub订阅、使用帮助、识图、识番、搜番、上车、磁力搜索、地震速报、计算、日语词典、翻译、自我检查，权限等级功能，由于是为了完成自己在群里的承诺，一时兴起才做的，所以写得比较粗糙，大家见谅。
 
 </div>
 
