@@ -27,6 +27,7 @@ RSSHUBAPP:str = "https://rsshub.app" # RSSHub自部署的域名
 EM :float = 4.0 # 地震速报功能的最低震级
 MAXINFO_REIMU: int = 3 # 上车功能查找目的地的最大数
 MAXINFO_ANIME: int = 4 # 搜番功能查找番剧的最大数
+MAXINFO_BT: int = 4 # 磁力搜索功能查找资源的最大数
 MAXLINE_JD: int = 7 # 日语词典功能查找条目的内容所允许的最大行书
 MAXWOED_JD: int = 250 # 日语词典功能查找条目的内容所允许的最大字数
 MAX_PERFORMANCE_PERCENT: List[int] = [92,92,92] # 自检功能中的服务器占用比率最高值，顺序分别对应CPU、内存和硬盘

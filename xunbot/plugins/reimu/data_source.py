@@ -59,7 +59,7 @@ async def get_repass(url: str) -> str:
         else: xlogger.debug("This title {} does not meet the requirements".format(header))
 
     header_len = len(headers_d)
-    xlogger.debug("[info]Get {} post after processing".format(header_len))
+    xlogger.debug("Get {} post after processing".format(header_len))
     if header_len > MAXINFO_REIMU:
         headers_d = headers_d[:MAXINFO_REIMU]
         urls_d = urls_d[:MAXINFO_REIMU]
@@ -96,7 +96,7 @@ async def get_son_html_info(h_s, url_s) -> str:
         for i, (a_t_s, a_h_s) in enumerate(zip(a_texts, a_hrefs)):
             a = "\n {}  {}  {} ".format(a_t_s, a_h_s, pres[i+1].strip())
             repass += a
-    else: xlogger.warning("[warning]Not get putline from {}".format(url_s))
+    else: xlogger.warning("Not get putline from {}".format(url_s))
 
     return repass
 

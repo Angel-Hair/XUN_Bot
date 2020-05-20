@@ -56,9 +56,9 @@ def remove_l(loacl_dict: dict):
     
     return pl
 
-def check(loacl_dict: dict):
+def check(local_dict: dict):
     repass_list = []
-    pl = loacl_dict
+    pl = local_dict
 
     key_list = list(pl.keys())
     if "END" in key_list:

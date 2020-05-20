@@ -20,10 +20,10 @@ ceic = Ceicinfo(EM, CEICONLYCN)
 
 @scheduler.scheduled_job('cron', minute='*')
 async def _():
-    bot = get_bot()
-    group_list = await bot.get_group_list()
     mesg = await ceic.getceicinfo()
     if mesg:
+        bot = get_bot()
+        group_list = await bot.get_group_list()
         try:
             for group in group_list:
                 xlogger.info("send group {} mesg……".format(group['group_name']))
