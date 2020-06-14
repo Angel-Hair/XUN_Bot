@@ -11,7 +11,7 @@ CEICONLYCN = get_bot().config.CEICONLYCN
 
 __plugin_name__ = '地震通报'
 __plugin_usage__ = r"""
-【被动技能】地震通报（误差±10min）
+【群技能】【被动技能】地震通报（误差±10min）
 """.strip()
 
 

@@ -8,6 +8,7 @@ from xunbot import get_bot
 __plugin_name__ = '上车'
 __plugin_usage__ = r"""
 不定期神隐的功能
+【上车功能暂时停止更新，但不停止支持，使用时可能会出现无反应或者报错】
 *请各位使用后不要转发*
 
 上车 [目的地]
