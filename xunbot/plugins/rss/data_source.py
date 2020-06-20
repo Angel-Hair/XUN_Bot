@@ -212,9 +212,12 @@ class RSS_reader():
         bot = get_bot()
 
         for rss in self.rsss:
-            update_msg = ["{}\n{}".format(item['title'], item['link']) 
-                        for item in 
-                        rss.get_update()]
+            try:
+                update_msg = ["{}\n{}".format(item['title'], item['link']) 
+                            for item in 
+                            rss.get_update()]
+            except RuntimeError as e:
+                update_msg = ["很抱歉，该订阅节点更新失败，请联系管理员维护或者取消订阅。"]
 
             if len(update_msg) > 0:
                 for suber in rss.subscribers:
