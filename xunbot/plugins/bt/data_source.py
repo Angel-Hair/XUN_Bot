@@ -23,6 +23,10 @@ async def get_bt_info(url: str) -> str:
     html_data = requests.get(url, headers=header)
     html = etree.HTML(html_data.text)
 
+    num = html.xpath('//div[@id="wall"]//span/b/text()')[0]
+    if num == '0':
+        return "没有找到记录"
+
     div_all = html.xpath('//div[@class="search-item"]')
     div_all = div_all[:MAXINFO_BT] if len(div_all) > MAXINFO_BT else div_all
     line_list = [await get_item_line(div) for div in div_all]
