@@ -27,7 +27,7 @@ async def get_bt_info(url: str) -> str:
     if num == '0':
         return "没有找到记录"
 
-    div_all = html.xpath('//div[@class="search-item"]')
+    div_all = html.xpath('//div[@class="search-item"]')[1:]
     div_all = div_all[:MAXINFO_BT] if len(div_all) > MAXINFO_BT else div_all
     line_list = [await get_item_line(div) for div in div_all]
     
