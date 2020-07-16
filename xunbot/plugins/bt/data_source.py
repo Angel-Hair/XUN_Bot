@@ -18,9 +18,13 @@ header = {
     "Accept-Language":"zh-CN,zh;"
 }
 
+cookiesDit = {
+    'r18':'0'
+}
+
 async def get_bt_info(url: str) -> str:
     xlogger.info("Now starting get the {}".format(url))
-    html_data = requests.get(url, headers=header)
+    html_data = requests.get(url, headers=header, cookies=cookiesDit)
     html = etree.HTML(html_data.text)
 
     num = html.xpath('//div[@id="wall"]//span/b/text()')[0]
