@@ -110,7 +110,7 @@ class ascii2d():
                 putline1 = self.add_repass("色调检索", color)
                 putline.append(putline1)
             if bovw:
-                putline2 = self.add_repass("色调检索", color)
+                putline2 = self.add_repass("特征检索", bovw)
                 putline.append(putline2)
 
             repass = "\n".join(putline)
