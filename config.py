@@ -40,7 +40,7 @@ TIMELIMIT_IMAGE: float = 7 # 识图功能的时间限制
 TIMELIMIT_REIMU: float = 12 # 上车功能的时间限制
 TIMELIMIT_JD: float = 7 # 日语词典功能的时间限制
 TIMELIMIT_TRANSL: float = 7 # 翻译功能的时间限制
-TIMELIMIT_ANIME: float = 7 # 搜番功能的时间限制
+TIMELIMIT_ANIME: float = 12 # 搜番功能的时间限制
 
 # Bool类
 CONFIGURATION_WIZARD: bool = True # 设置每次运行时是否需要确认运行配置向导

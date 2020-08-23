@@ -272,7 +272,7 @@ TIMELIMIT_IMAGE: float = 7 # 识图功能的时间限制
 TIMELIMIT_REIMU: float = 12 # 上车功能的时间限制
 TIMELIMIT_JD: float = 7 # 日语词典功能的时间限制
 TIMELIMIT_TRANSL: float = 7 # 翻译功能的时间限制
-TIMELIMIT_ANIME: float = 7 # 搜番功能的时间限制
+TIMELIMIT_ANIME: float = 16 # 搜番功能的时间限制
 
 # Bool类
 CONFIGURATION_WIZARD: bool = True # 设置每次运行时是否需要确认运行配置向导
@@ -326,8 +326,8 @@ RSSINTERVAL: dict = {
   * `TIMELIMIT_IMAGE` ：在 识图 功能中设置的时间限制，单位为(s)，如果检索某个API来源时超时的话，会在控制台报出相应的警告，在回复中则不会有对应的内容。请根据服务器的网络环境自行设置，推荐设置在5~10之间。
   * `TIMELIMIT_JD` ：在 日文词典 功能中设置的时间限制，单位为(s)，详细介绍同上。
   * `TIMELIMIT_TRANSL` ：在 翻译 功能中设置的时间限制，单位为(s)，详细介绍同上。
-  * `TIMELIMIT_ANIME` ： 在 搜番 功能中设置的时间限制，单位为(s)，详细介绍同上。
-  * `TIMELIMIT_REIMU` ：在 上车 功能中设置的时间限制，单位为(s)，如果检索某个API来源时超时的话，会在控制台报出相应的警告，在回复中则不会有对应的内容。请根据服务器的网络环境和`MAXINFO_REIMU`的值自行设置，推荐设置在9~14之间。
+  * `TIMELIMIT_REIMU` ： 在 上车 功能中设置的时间限制，单位为(s)，除了包括上面的介绍，还需要根据服务器的网络环境和`MAXINFO_REIMU`的值自行设置，推荐设置在9~14之间。
+  * `TIMELIMIT_ANIME` ： 在 搜番 功能中设置的时间限制，单位为(s)，除了包括上面的介绍，还需要根据服务器的网络环境和`MAXINFO_ANIME`的值自行设置，而且由于需要单独请求一个RSS feed，推荐设置在12~18之间。
 * Bool类
   * `CEICONLYCN` ：在 地震速报 功能中是否只报道国内地震，如果只需要报道国内地震请设置为True。推荐设置为True。
   * `RECOMMENDER_MUSIC` ：在 音乐推荐 功能中是否需要回复显示推荐者。
