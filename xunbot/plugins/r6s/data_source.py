@@ -4,31 +4,34 @@ import math
 async def get_r6smessage_of_username(username: str) -> str:
     result = r6s_result(username)
 
-    ranks = ''
-    if not result['rank_kd'] == 'Undefined':
-        ranks = '【排名战】\n > KD:{}\n > 胜负比:{}\n > 游戏场数:{}\n'.\
-            format(result['rank_kd'],result['rank_wl'],result['rank_played'])
+    if result:
+        ranks = ''
+        if not result['rank_kd'] == 'Undefined':
+            ranks = '【排名战】\n > KD:{}\n > 胜负比:{}\n > 游戏场数:{}\n'.\
+                format(result['rank_kd'],result['rank_wl'],result['rank_played'])
 
-    mmrs = ''
-    if not result['mmr_list'] == 'Undefined':
-        mmrs += '【排名战段位】\n > 区域\t赛季\t最终MMR\t最高MMR\n'
-        for i,rank in enumerate(result['mmr_list']):
-            mmrs += ' > ' + rank['region'] + '\t' + \
-                rank['season'] + '\t' + rank['mmr'] + '\t' + rank['max_mmr']
-            if not i == len(result['mmr_list']) - 1:
-                mmrs += '\n'
-    
-    repass = ' > 等级:{}\n【综合数据】\n > KD:{}\n > 胜负比:{}\n > 游戏场数:{}\n > 爆头击杀率:{}\n{}{}'.\
-        format(result['apac_level'],result['kd'],result['wl'],result['played'],result['kh'],ranks,mmrs)
+        mmrs = ''
+        if not result['mmr_list'] == 'Undefined':
+            mmrs += '【排名战段位】\n > 区域\t赛季\t最终MMR\t最高MMR\n'
+            for i,rank in enumerate(result['mmr_list']):
+                mmrs += ' > ' + rank['region'] + '\t' + \
+                    rank['season'] + '\t' + rank['mmr'] + '\t' + rank['max_mmr']
+                if not i == len(result['mmr_list']) - 1:
+                    mmrs += '\n'
+        
+        repass = ' > 等级:{}\n【综合数据】\n > KD:{}\n > 胜负比:{}\n > 游戏场数:{}\n > 爆头击杀率:{}\n{}{}'.\
+            format(result['apac_level'],result['kd'],result['wl'],result['played'],result['kh'],ranks,mmrs)
 
-    return repass
+        return repass
+    else:
+        return '暂无该用户数据'
 
 def r6s_result(username: str) -> dict:
     base_url = "https://www.r6s.cn/Stats?username="
     url = base_url + str(username) + '&platform='
     headers = {
         'Host': 'www.r6s.cn',
-        'referer': 'https://www.r6s.cn/stats.jsp?username=Original_04',
+        'referer': 'https://www.r6s.cn',
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36',
         'x-requested-with': 'XMLHttpRequest'
     }
