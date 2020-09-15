@@ -8,7 +8,7 @@
 ![Code Name](https://img.shields.io/badge/%E5%BC%80%E5%8F%91%E4%BB%A3%E5%8F%B7-Langskip-9cf)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/Angel-Hair/XUN_Bot)
 
-XUN 是一个基于 [NoneBot](https://github.com/richardchien/nonebot) 和 [酷Q](https://cqp.cc) 的功能型QQ机器人，目前提供了音乐点播、音乐推荐、天气查询、RSSHub订阅、使用帮助、识图、识番、搜番、上车、磁力搜索、地震速报、计算、日语词典、翻译、自我检查，权限等级功能，由于是为了完成自己在群里的承诺，一时兴起才做的，所以写得比较粗糙，大家见谅。
+XUN 是一个基于 [NoneBot](https://github.com/richardchien/nonebot) 和 [酷Q](https://cqp.cc) 的功能型QQ机器人，目前提供了音乐点播、音乐推荐、天气查询、RSSHub订阅、使用帮助、识图、识番、搜番、上车、磁力搜索、地震速报、计算、日语词典、翻译、r6战绩查询、自我检查，权限等级功能，由于是为了完成自己在群里的承诺，一时兴起才做的，所以写得比较粗糙，大家见谅。
 
 </div>
 
@@ -134,6 +134,16 @@ XUN 是一个基于 [NoneBot](https://github.com/richardchien/nonebot) 和 [酷Q
 修改 `config.py` 中的 `MAXINFO_BT` 此值，可以更改回复时返回的资源数目，详细配置请参考上面 [配置](#user-content-配置) 这一节的内容。
 
 **关于此功能我不会再有过多的描述了，请自行体会。**
+
+### 彩虹六号战绩查询
+
+![18.png](https://i.loli.net/2020/09/15/eDibPHOu9vnXqdY.png)
+
+作者：@dongquanC
+
+查询彩虹六号战绩的功能，因源网址是[R6中文站](https://www.r6s.cn)，有一定的限制，比如s3s4s5的查不到。
+
+*此功能没有启用 `自然语言处理器` 模块，所以请用 `标准命令格式 + 查询单词` 的形式来使用*
 
 ### 上车(已暂停更新，使用时可能会出现报错或者无反应)
 
@@ -367,7 +377,6 @@ XUN 在 alpha1.0 版本后加入了使用帮助功能，其中包含更加详细
 除了上面功能说明中提到的完善计划，还将计划加入以下功能:
 
 * 开发框架
-* 游戏战绩查询
 * ~~骚话~~ 嘴臭
 
 > XUN: ~~有生之年~~ 史 诗 巨 坑  
