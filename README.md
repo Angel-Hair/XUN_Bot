@@ -145,6 +145,28 @@ XUN 是一个基于 [NoneBot](https://github.com/richardchien/nonebot) 和 [酷Q
 
 *此功能没有启用 `自然语言处理器` 模块，所以请用 `标准命令格式 + 查询单词` 的形式来使用*
 
+### 留言板
+
+![19.png](https://i.loli.net/2020/09/22/MdSUifzKTn2Ps3h.png)
+
+一个简单的留言板功能，可以留言或者查看留言，通过修改 `config.py` 中的 `MAX_MGB_LIST` 和 `MAX_MGB_WORD` 来修改查看留言的条数和留言的字数限制，详细配置请参考上面 [配置](#user-content-配置) 这一节的内容。
+
+**查看的留言为所设置条数最新的几条留言，但所有的留言都保存在根目录下的 `msg_board.csv` 文件里**
+
+### 致电管理员
+
+![20.png](https://i.loli.net/2020/09/22/I3mdNwfqx6j4kvW.png)
+
+通过小寻来致电管理员的功能，可通过修改 `config.py` 中的 `CALL_BLACK_DICT` 的值来设置黑名单，详细配置请参考上面 [配置](#user-content-配置) 这一节的内容。
+
+### 群通知
+
+![21.png](https://i.loli.net/2020/09/22/oVUnmP3AG2WFJQu.png)
+
+通过小寻来通知指定群的功能，可通过修改 `config.py` 中的 `PUSH_GROUP_DICT` 的值来设置要通知的群列表，详细配置请参考上面 [配置](#user-content-配置) 这一节的内容。
+
+**此功能为管理员功能，非管理员无法唤醒**
+
 ### 上车(已暂停更新，使用时可能会出现报错或者无反应)
 
 ![8.png](https://i.loli.net/2020/01/16/J5NSW2BfbjMK6VZ.png)
@@ -256,6 +278,7 @@ SUPERUSERS = {123456} # 管理员（你）的QQ号
 
 # ————————以下是部分功能模块需要的额外配置，请参见github上的说明进行配置————————
 
+
 # Permission类
 PERMISSION_LEVEL: int = 6 # 权限等级值，建议不要设置为8以下
 
@@ -276,13 +299,15 @@ MAX_PERFORMANCE_PERCENT: List[int] = [92,92,92] # 自检功能中的服务器占
 MAX_RSS_P: int = 2
 MAX_RSS_G: int = 5
 MAX_RSS_D: int = 5 # 以上三个分别为RSS订阅功能的个人(private)、群(group)、讨论组(discuss)订阅的最大订阅数限制
+MAX_MGB_WORD: int = 200 # 留言板功能的最大字数
+MAX_MGB_LIST:int = 5 # 留言板功能的最大查看留言条数
 
 # TimeLimit类
 TIMELIMIT_IMAGE: float = 7 # 识图功能的时间限制
 TIMELIMIT_REIMU: float = 12 # 上车功能的时间限制
 TIMELIMIT_JD: float = 7 # 日语词典功能的时间限制
 TIMELIMIT_TRANSL: float = 7 # 翻译功能的时间限制
-TIMELIMIT_ANIME: float = 16 # 搜番功能的时间限制
+TIMELIMIT_ANIME: float = 12 # 搜番功能的时间限制
 
 # Bool类
 CONFIGURATION_WIZARD: bool = True # 设置每次运行时是否需要确认运行配置向导
@@ -309,6 +334,11 @@ RSSINTERVAL: dict = {
     # 'second': 0
     } 
     # RSS订阅功能的检查间隔, 作为 scheduled_job 的的参数传入，默认值的意思为每隔1小时检测一次。
+    # 详细配置参考：https://apscheduler.readthedocs.io/en/latest/modules/triggers/interval.html?highlight=interval#module-apscheduler.triggers.interval
+CALL_BLACK_DICT: dict = {123456} # 致电管理员功能的黑名单，需要填入qq号
+PUSH_GROUP_DICT: dict = {123456} # 群通知功能公告的群
+
+
 # —————————————————————————————————————————————————————————————————————————
 ```
 
@@ -330,6 +360,8 @@ RSSINTERVAL: dict = {
   * `MAXINFO_BT` ：在 磁力搜索 功能中配置查找的资源的数量限制，最多只能显示指定数量的资源数，推荐设置为4。
   * `MAXLINE_JD` ：在 日文词典 功能中查找条目的内容所允许的最大行书，超过该条数的内容将被省略，并报出提示。
   * `MAXWOED_JD` ：在 日文词典 功能查找条目的内容所允许的最大字数，超过该字数的内容将被省略，并报出提示。
+  * `MAX_MGB_WORD` ：在 留言板 功能中留言所允许的最大字数，超过该字数的内容将无法留言，并报出提示。
+  * `MAX_MGB_LIST` ：在 留言板 功能中查看留言板中留言的最大条数，超过该条数的旧留言将被省略。
   * `MAX_PERFORMANCE_PERCENT` :  在 自我检查 功能中的服务器占用比率最高值，需填入长度为3的list，根据顺序分别对应CPU、内存和硬盘的最大占有率，如果超过该值，在群聊中，进行自检时会有对应的回应，并向所有管理员发送通知。
   * `MAX_RSS_P`&`MAX_RSS_G`&`MAX_RSS_D` ：在 RSSHub订阅 功能中分别对应私人、群、讨论组的订阅数最大值，超过该值则不会完成订阅，并报出提示。
 * TimeLimit类
@@ -348,6 +380,8 @@ RSSINTERVAL: dict = {
   * `PROCESS_NAME_LIST` ：在 自我检查 功能中需要提供的格外检查的进程名，如果发现同名的进程中至少有一个进程的状态不是"running"的时候，在群聊中，进行自检时会有对应的回应，并向所有管理员发送通知。
   * `TO_TRANSL` : 在 翻译 功能中指定翻译的目标语言，默认为中文，其他语言的列表请参考 [百度翻译开发者手册](http://api.fanyi.baidu.com/doc/21) 和 [Googletrans](https://github.com/ssut/py-googletrans)
   * `RSSINTERVAL` : 在 RSSHub订阅 功能中检查订阅列表更新的时间间隔，每个时间键的值类型应该为int，默认值的意思为每隔1小时检测一次，如果想设置为每半小时检查一次，应该注释掉`hour`行，取消`minutes`行的注释，并把对应值`0`改为`30`。不建议设置为10分钟以下。该值其实是作为 `scheduled_job` 的的参数传入的，详细说明参考 [官方说明](https://apscheduler.readthedocs.io/en/latest/modules/triggers/interval.html?highlight=interval#module-apscheduler.triggers.interval)。
+  * `CALL_BLACK_DICT` ：在 致电管理员 功能中设置黑名单，在黑名单中的QQ号将无法致电。
+  * `PUSH_GROUP_DICT` ：在 群通知 功能中设置需要通知的群，当管理员使用该功能通知时，仅通知所含指定群。
 
 </details>
 <br>

@@ -14,6 +14,7 @@ SUPERUSERS = {123456} # 管理员（你）的QQ号
 
 # ————————以下是部分功能模块需要的额外配置，请参见github上的说明进行配置————————
 
+
 # Permission类
 PERMISSION_LEVEL: int = 6 # 权限等级值，建议不要设置为8以下
 
@@ -34,6 +35,8 @@ MAX_PERFORMANCE_PERCENT: List[int] = [92,92,92] # 自检功能中的服务器占
 MAX_RSS_P: int = 2
 MAX_RSS_G: int = 5
 MAX_RSS_D: int = 5 # 以上三个分别为RSS订阅功能的个人(private)、群(group)、讨论组(discuss)订阅的最大订阅数限制
+MAX_MGB_WORD: int = 200 # 留言板功能的最大字数
+MAX_MGB_LIST:int = 5 # 留言板功能的最大查看留言条数
 
 # TimeLimit类
 TIMELIMIT_IMAGE: float = 7 # 识图功能的时间限制
@@ -68,5 +71,8 @@ RSSINTERVAL: dict = {
     } 
     # RSS订阅功能的检查间隔, 作为 scheduled_job 的的参数传入，默认值的意思为每隔1小时检测一次。
     # 详细配置参考：https://apscheduler.readthedocs.io/en/latest/modules/triggers/interval.html?highlight=interval#module-apscheduler.triggers.interval
+CALL_BLACK_DICT: dict = {123456} # 致电管理员功能的黑名单，需要填入qq号
+PUSH_GROUP_DICT: dict = {123456} # 群通知功能公告的群
+
 
 # —————————————————————————————————————————————————————————————————————————
