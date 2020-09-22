@@ -1,7 +1,7 @@
 import requests
 import math
 
-async def get_r6smessage_of_username(username: str) -> str:
+async def get_r6smessage_of_username(username: str) -> str: 
     result = r6s_result(username)
 
     if result:
@@ -24,7 +24,7 @@ async def get_r6smessage_of_username(username: str) -> str:
 
         return repass
     else:
-        return '暂无该用户数据'
+        return f"用户「{username}」未找到"
 
 def r6s_result(username: str) -> dict:
     base_url = "https://www.r6s.cn/Stats?username="
@@ -38,7 +38,7 @@ def r6s_result(username: str) -> dict:
 
     response = requests.get(url,headers = headers)
     r6_json = response.json()
-    if r6_json['status'] == 200:
+    if r6_json:
         apac_level = r6_json['Basicstat'][0]['level']
         # 综合
         kd = r6_json['StatGeneral'][0]['kills']/r6_json['StatGeneral'][0]['deaths']
