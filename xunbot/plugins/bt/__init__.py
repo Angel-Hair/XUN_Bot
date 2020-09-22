@@ -50,7 +50,7 @@ async def _(session: CommandSession):
 def get_url(words: str) -> str:
     url = ''
     if words != '':
-        domain = "www.btmet.xyz"
+        domain = "www.btmet.top"
         if '-U' == words[:2].upper():
             key = words[2:]
             if key != '':

@@ -11,7 +11,7 @@ MAXINFO_BT = get_bot().config.MAXINFO_BT
 
 
 header = {
-    "Host": "www.btmet.xyz",
+    "Host": "www.btmet.top",
     "Connection": "keep-alive",
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:76.0) Gecko/20100101 Firefox/76.0",
