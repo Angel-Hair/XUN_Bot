@@ -8,7 +8,7 @@
 ![Code Name](https://img.shields.io/badge/%E5%BC%80%E5%8F%91%E4%BB%A3%E5%8F%B7-Langskip-9cf)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/Angel-Hair/XUN_Bot)
 
-XUN 是一个基于 [NoneBot](https://github.com/richardchien/nonebot) 和 [酷Q](https://cqp.cc) 的功能型QQ机器人，目前提供了音乐点播、音乐推荐、天气查询、RSSHub订阅、使用帮助、识图、识番、搜番、上车、磁力搜索、地震速报、计算、日语词典、翻译、r6战绩查询、自我检查，留言板，致电管理员，群通知，权限等级功能，由于是为了完成自己在群里的承诺，一时兴起才做的，所以写得比较粗糙，大家见谅。
+XUN 是一个基于 [NoneBot](https://github.com/richardchien/nonebot) 和 [酷Q](https://cqp.cc) 的功能型QQ机器人，目前提供了音乐点播、音乐推荐、天气查询、RSSHub订阅、使用帮助、识图、识番、搜番、上车、磁力搜索、地震速报、计算、日语词典、翻译、r6战绩查询、黄历、自我检查，留言板，致电管理员，群通知，权限等级功能，由于是为了完成自己在群里的承诺，一时兴起才做的，所以写得比较粗糙，大家见谅。
 
 </div>
 
@@ -166,6 +166,12 @@ XUN 是一个基于 [NoneBot](https://github.com/richardchien/nonebot) 和 [酷Q
 通过小寻来通知指定群的功能，可通过修改 `config.py` 中的 `PUSH_GROUP_DICT` 的值来设置要通知的群列表，详细配置请参考上面 [配置](#user-content-配置) 这一节的内容。
 
 **此功能为管理员功能，非管理员无法唤醒**
+
+### 黄历
+
+![22.png](https://i.loli.net/2020/09/26/M19cgWXUSsvPI3T.png)
+
+> 民俗社会科学项目，不搞封建迷信，宜忌意义在于民间是将红白事合理分开，避免今日您宴请宾客，邻居办白事情况出现，引起邻里纠纷社会分裂。 ——[pyLunarCalendar](https://github.com/OPN48/pyLunarCalendar)
 
 ### 上车(已暂停更新，使用时可能会出现报错或者无反应)
 
@@ -434,6 +440,13 @@ XUN 在 alpha1.0 版本后加入了使用帮助功能，其中包含更加详细
 
 > AH: 太屑了  
 > AH: 给爷爬  
+
+## 项目支持
+
+**感谢一下项目的支持：**
+
+* [hanziconv](https://github.com/berniey/hanziconv)
+* [pyLunarCalendar](https://github.com/OPN48/pyLunarCalendar)
 
 ## 开源许可证
 
