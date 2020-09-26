@@ -443,7 +443,7 @@ XUN 在 alpha1.0 版本后加入了使用帮助功能，其中包含更加详细
 
 ## 项目支持
 
-**感谢一下项目的支持：**
+**感谢以下项目的支持：**
 
 * [hanziconv](https://github.com/berniey/hanziconv)
 * [pyLunarCalendar](https://github.com/OPN48/pyLunarCalendar)
