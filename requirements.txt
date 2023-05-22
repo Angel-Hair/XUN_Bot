@@ -1,6 +1,6 @@
 nonebot[scheduler]==1.6.0
 aiocqhttp==1.2.5
-requests==2.23.0
+requests==2.31.0
 lxml==4.5.0
 thulac==0.2.1
 kth-timeoutdecorator==0.0.5
